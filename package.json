@@ -1,0 +1,26 @@
+{
+  "name": "analytics-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/public/index.html",
+    "build": "parcel build src/public/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malcodeman/analytics-frontend.git"
+  },
+  "author": "malcodeman",
+  "bugs": {
+    "url": "https://github.com/malcodeman/analytics-frontend/issues"
+  },
+  "homepage": "https://github.com/malcodeman/analytics-frontend#readme",
+  "devDependencies": {
+    "parcel": "^2.0.0-alpha.3.2"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
