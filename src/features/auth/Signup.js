@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Input, Button, FormControl } from "malcomponents";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import bg from "./bg.jpg";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 
 const Container = styled.div`
   display: grid;
@@ -32,43 +31,28 @@ const FormWrapper = styled.div`
   max-width: 576px;
 `;
 
-function Signup(props) {
-  const signupSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Email is invalid")
-      .required("Email is required")
-  });
-  const formik = useFormik({
-    initialValues: {
-      email: ""
-    },
-    validationSchema: signupSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    }
-  });
+function Signup() {
+  const [showLoginForm, setShowLoginForm] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+
+  function onSignupSuccess(data) {
+    setEmail(data.email);
+    setShowLoginForm(true);
+  }
+
+  function onLoginSuccess(data) {
+    console.log("onLoginSuccess", data);
+  }
 
   return (
     <Container>
       <Image />
       <FormWrapper>
-        <form onSubmit={formik.handleSubmit}>
-          <FormControl
-            label="Your email"
-            caption={formik.errors.email}
-            error={Boolean(formik.errors.email)}
-          >
-            <Input
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              name="email"
-              style={{ marginBottom: "0.5rem" }}
-            />
-          </FormControl>
-          <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
-            Get started
-          </Button>
-        </form>
+        {showLoginForm ? (
+          <LoginForm email={email} onSuccess={onLoginSuccess} />
+        ) : (
+          <SignupForm onSuccess={onSignupSuccess} />
+        )}
       </FormWrapper>
     </Container>
   );
