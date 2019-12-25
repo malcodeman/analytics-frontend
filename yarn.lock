@@ -4188,10 +4188,10 @@ magic-string@^0.22.4:
   dependencies:
     vlq "^0.2.2"
 
-malcomponents@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/malcomponents/-/malcomponents-1.1.5.tgz#22b4f93417bdcd02f0ef4e446683520f4ba8791b"
-  integrity sha512-DPRIaYhX+IYzhIM+25Q21lai4FvlupaIQpZQ/KSsTauG93T2OVpnQJjwHI5Cgiu6kfDNj8/bUdE+jW6oCLMG6w==
+malcomponents@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/malcomponents/-/malcomponents-1.1.6.tgz#ac82321f8426b8bb2f3576e4c50d410872318177"
+  integrity sha512-VJY+2LpMs7Oe+CW2u3DNdSy6k24wfat9aZY8Az8dS075TtFORIPLjXTWevcOT5ep/O5ZQOXo0ExN7NR92yYQBA==
   dependencies:
     malhooks "^1.0.6"
     prop-types "^15.7.2"

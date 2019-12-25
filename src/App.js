@@ -12,6 +12,8 @@ import PrivateRoute from "./routing/PrivateRoute";
 import Signup from "./features/auth/Signup";
 import Onboarding from "./features/onboarding/Onboarding";
 import Dashboard from "./features/dashboard/Dashboard";
+import Layout from "./features/layout/Layout";
+import Sites from "./features/sites/Sites";
 
 function App() {
   const client = new ApolloClient({
@@ -35,19 +37,11 @@ function App() {
       <ThemeProvider>
         <Router history={history}>
           {isAuthorized ? (
-            <>
-              <PrivateRoute
-                exact
-                path="/"
-                component={Dashboard}
-                isAuthorized={isAuthorized}
-              />
-              <PrivateRoute
-                path="/onboarding"
-                component={Onboarding}
-                isAuthorized={isAuthorized}
-              />
-            </>
+            <Layout>
+              <Route exact path="/" component={Dashboard} />
+              <Route path="/sites" component={Sites} />
+              <Route path="/onboarding" component={Onboarding} />
+            </Layout>
           ) : (
             <Route exact path="/" component={Signup} />
           )}
