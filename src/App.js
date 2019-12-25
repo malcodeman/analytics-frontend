@@ -2,20 +2,56 @@ import React from "react";
 import { ThemeProvider } from "malcomponents";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
+import { Router, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import constants from "./constants";
 import GlobalStyle from "./GlobalStyle";
+import history from "./routing/history";
+import PrivateRoute from "./routing/PrivateRoute";
 import Signup from "./features/auth/Signup";
+import Onboarding from "./features/onboarding/Onboarding";
+import Dashboard from "./features/dashboard/Dashboard";
 
 function App() {
   const client = new ApolloClient({
-    uri: constants.GRAPHQL_URI
+    uri: constants.GRAPHQL_URI,
+    request: operation => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        operation.setContext({
+          headers: {
+            authorization: token ? token : null
+          }
+        });
+      }
+    }
   });
+  const isAuthorized = useSelector(state => state.auth.isAuthorized);
 
   return (
     <ApolloProvider client={client}>
       <ThemeProvider>
-        <Signup />
+        <Router history={history}>
+          {isAuthorized ? (
+            <>
+              <PrivateRoute
+                exact
+                path="/"
+                component={Dashboard}
+                isAuthorized={isAuthorized}
+              />
+              <PrivateRoute
+                path="/onboarding"
+                component={Onboarding}
+                isAuthorized={isAuthorized}
+              />
+            </>
+          ) : (
+            <Route exact path="/" component={Signup} />
+          )}
+        </Router>
         <GlobalStyle />
       </ThemeProvider>
     </ApolloProvider>

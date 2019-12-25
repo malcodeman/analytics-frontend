@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { FormControl, Input, Button } from "malcomponents";
 import { useMutation } from "@apollo/react-hooks";
 
-import mutations from "./authMutations";
+import mutations from "../../api/mutations";
 
 function LoginForm(props) {
   const [login, loginResult] = useMutation(mutations.LOGIN_MUTATION);

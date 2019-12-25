@@ -14,11 +14,28 @@ const LOGIN_MUTATION = gql`
       id
       email
       isVerified
+      token
+    }
+  }
+`;
+const UPDATE_USER_MUTATION = gql`
+  mutation updateUser(
+    $firstName: String!
+    $lastName: String!
+    $company: String
+  ) {
+    updateUser(firstName: $firstName, lastName: $lastName, company: $company) {
+      id
+      email
+      firstName
+      lastName
+      company
     }
   }
 `;
 
 export default {
   SIGNUP_MUTATION,
-  LOGIN_MUTATION
+  LOGIN_MUTATION,
+  UPDATE_USER_MUTATION
 };

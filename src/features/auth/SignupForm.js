@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
-import mutations from "./authMutations";
+import mutations from "../../api/mutations";
 
 function SignupForm(props) {
   const [signup, signupResult] = useMutation(mutations.SIGNUP_MUTATION);
