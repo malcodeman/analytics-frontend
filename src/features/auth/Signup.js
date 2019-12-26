@@ -50,7 +50,7 @@ function Signup() {
     dispatch({
       type: LOGIN_SUCCESS
     });
-    history.push("/onboarding");
+    history.push("/");
   }
 
   return (
