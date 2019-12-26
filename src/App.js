@@ -14,6 +14,7 @@ import Onboarding from "./features/onboarding/Onboarding";
 import Dashboard from "./features/dashboard/Dashboard";
 import Layout from "./features/layout/Layout";
 import Sites from "./features/sites/Sites";
+import Account from "./features/account/Account";
 
 function App() {
   const client = new ApolloClient({
@@ -40,6 +41,7 @@ function App() {
             <Layout>
               <Route exact path="/" component={Dashboard} />
               <Route path="/sites" component={Sites} />
+              <Route path="/account" component={Account} />
               <Route path="/onboarding" component={Onboarding} />
             </Layout>
           ) : (
