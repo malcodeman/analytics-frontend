@@ -1,10 +1,9 @@
 import React from "react";
 import { ThemeProvider } from "malcomponents";
-import { ApolloProvider } from "@apollo/react-hooks";
-import ApolloClient from "apollo-boost";
+import { useQuery } from "@apollo/react-hooks";
 import { Router, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
 
+import queries from "./api/queries";
 import constants from "./constants";
 import GlobalStyle from "./GlobalStyle";
 import history from "./routing/history";
@@ -17,40 +16,25 @@ import Sites from "./features/sites/Sites";
 import Account from "./features/account/Account";
 
 function App() {
-  const client = new ApolloClient({
-    uri: constants.GRAPHQL_URI,
-    request: operation => {
-      const token = localStorage.getItem("token");
-
-      if (token) {
-        operation.setContext({
-          headers: {
-            authorization: token ? token : null
-          }
-        });
-      }
-    }
-  });
-  const isAuthorized = useSelector(state => state.auth.isAuthorized);
+  const { data } = useQuery(queries.IS_LOGGED_IN);
+  const isLoggedIn = data.isLoggedIn;
 
   return (
-    <ApolloProvider client={client}>
-      <ThemeProvider>
-        <Router history={history}>
-          {isAuthorized ? (
-            <Layout>
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/sites" component={Sites} />
-              <Route path="/account" component={Account} />
-              <Route path="/onboarding" component={Onboarding} />
-            </Layout>
-          ) : (
-            <Route exact path="/" component={Signup} />
-          )}
-        </Router>
-        <GlobalStyle />
-      </ThemeProvider>
-    </ApolloProvider>
+    <ThemeProvider>
+      <Router history={history}>
+        {isLoggedIn ? (
+          <Layout>
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/sites" component={Sites} />
+            <Route path="/account" component={Account} />
+            <Route path="/onboarding" component={Onboarding} />
+          </Layout>
+        ) : (
+          <Route exact path="/" component={Signup} />
+        )}
+      </Router>
+      <GlobalStyle />
+    </ThemeProvider>
   );
 }
 

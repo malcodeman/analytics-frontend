@@ -1,15 +1,35 @@
 import React from "react";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
 
+import constants from "./constants";
 import App from "./App";
-import store from "./state/store";
 
 const MOUNT_NODE = document.getElementById("root");
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+  cache,
+  uri: constants.GRAPHQL_URI,
+  request: operation => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      operation.setContext({
+        headers: {
+          authorization: token ? token : null
+        }
+      });
+    }
+  }
+});
+cache.writeData({
+  data: { isLoggedIn: Boolean(localStorage.getItem("token")) }
+});
 
 render(
-  <Provider store={store}>
+  <ApolloProvider client={client}>
     <App />
-  </Provider>,
+  </ApolloProvider>,
   MOUNT_NODE
 );

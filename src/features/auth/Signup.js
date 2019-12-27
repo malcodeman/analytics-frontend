@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useApolloClient } from "@apollo/react-hooks";
 
-import { LOGIN_SUCCESS } from "./constants";
 import bg from "./bg.jpg";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
@@ -35,7 +34,7 @@ const FormWrapper = styled.div`
 `;
 
 function Signup() {
-  const dispatch = useDispatch();
+  const client = useApolloClient();
   const history = useHistory();
   const [showLoginForm, setShowLoginForm] = React.useState(false);
   const [email, setEmail] = React.useState("");
@@ -47,9 +46,7 @@ function Signup() {
 
   function onLoginSuccess(data) {
     localStorage.setItem("token", data.token);
-    dispatch({
-      type: LOGIN_SUCCESS
-    });
+    client.writeData({ data: { isLoggedIn: true } });
     history.push("/");
   }
 

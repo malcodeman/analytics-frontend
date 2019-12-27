@@ -13,7 +13,13 @@ const FIND_MYSELF_QUERY = gql`
     }
   }
 `;
+const IS_LOGGED_IN = gql`
+  query IsUserLoggedIn {
+    isLoggedIn @client
+  }
+`;
 
 export default {
-  FIND_MYSELF_QUERY
+  FIND_MYSELF_QUERY,
+  IS_LOGGED_IN
 };
