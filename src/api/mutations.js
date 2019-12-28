@@ -35,9 +35,17 @@ const UPDATE_USER_MUTATION = gql`
     }
   }
 `;
+const ADD_SITE = gql`
+  mutation addSite($name: String!) {
+    addSite(name: $name) {
+      name
+    }
+  }
+`;
 
 export default {
   SIGNUP_MUTATION,
   LOGIN_MUTATION,
-  UPDATE_USER_MUTATION
+  UPDATE_USER_MUTATION,
+  ADD_SITE
 };
