@@ -13,6 +13,17 @@ const FIND_MYSELF_QUERY = gql`
     }
   }
 `;
+const FIND_MY_SITES_QUERY = gql`
+  {
+    findMySites {
+      sites {
+        id
+        name
+        siteId
+      }
+    }
+  }
+`;
 const IS_LOGGED_IN = gql`
   query IsUserLoggedIn {
     isLoggedIn @client
@@ -21,5 +32,6 @@ const IS_LOGGED_IN = gql`
 
 export default {
   FIND_MYSELF_QUERY,
-  IS_LOGGED_IN
+  IS_LOGGED_IN,
+  FIND_MY_SITES_QUERY
 };
