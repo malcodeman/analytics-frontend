@@ -42,10 +42,16 @@ const ADD_SITE = gql`
     }
   }
 `;
+const DESTROY_SITE = gql`
+  mutation destroySite($siteId: Int!) {
+    destroySite(siteId: $siteId)
+  }
+`;
 
 export default {
   SIGNUP_MUTATION,
   LOGIN_MUTATION,
   UPDATE_USER_MUTATION,
-  ADD_SITE
+  ADD_SITE,
+  DESTROY_SITE
 };
