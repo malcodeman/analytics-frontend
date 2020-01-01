@@ -35,24 +35,26 @@ function LoginForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <FormControl
         label="Your email"
-        caption={formik.errors.email}
-        error={Boolean(formik.errors.email)}
+        caption={formik.touched.email && formik.errors.email}
+        error={Boolean(formik.errors.email && formik.touched.email)}
       >
         <Input
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           name="email"
           style={{ marginBottom: "0.5rem" }}
         />
       </FormControl>
       <FormControl
         label="Login code"
-        caption={formik.errors.password}
-        error={Boolean(formik.errors.password)}
+        caption={formik.touched.password && formik.errors.password}
+        error={Boolean(formik.errors.password && formik.touched.password)}
       >
         <Input
           value={formik.values.password}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           name="password"
           style={{ marginBottom: "0.5rem" }}
         />

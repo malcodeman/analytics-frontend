@@ -33,12 +33,13 @@ function SignupForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <FormControl
         label="Your email"
-        caption={formik.errors.email}
-        error={Boolean(formik.errors.email)}
+        caption={formik.touched.email && formik.errors.email}
+        error={Boolean(formik.errors.email && formik.touched.email)}
       >
         <Input
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           name="email"
           style={{ marginBottom: "0.5rem" }}
         />

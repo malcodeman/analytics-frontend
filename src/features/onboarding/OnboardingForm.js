@@ -44,36 +44,39 @@ function OnboardingForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <FormControl
         label="First name"
-        caption={formik.errors.firstName}
-        error={Boolean(formik.errors.firstName)}
+        caption={formik.touched.firstName && formik.errors.firstName}
+        error={Boolean(formik.errors.firstName && formik.touched.firstName)}
       >
         <Input
           value={formik.values.firstName}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           name="firstName"
           style={{ marginBottom: "0.5rem" }}
         />
       </FormControl>
       <FormControl
         label="Last name"
-        caption={formik.errors.lastName}
-        error={Boolean(formik.errors.lastName)}
+        caption={formik.touched.lastName && formik.errors.lastName}
+        error={Boolean(formik.errors.lastName && formik.touched.lastName)}
       >
         <Input
           value={formik.values.lastName}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           name="lastName"
           style={{ marginBottom: "0.5rem" }}
         />
       </FormControl>
       <FormControl
         label="Company"
-        caption={formik.errors.company}
-        error={Boolean(formik.errors.company)}
+        caption={formik.touched.company && formik.errors.company}
+        error={Boolean(formik.errors.company && formik.touched.company)}
       >
         <Input
           value={formik.values.company}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           name="company"
           style={{ marginBottom: "0.5rem" }}
         />

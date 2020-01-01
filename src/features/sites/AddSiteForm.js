@@ -31,12 +31,13 @@ function AddSiteForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <FormControl
         label="Site name"
-        caption={formik.errors.name}
-        error={Boolean(formik.errors.name)}
+        caption={formik.touched.name && formik.errors.name}
+        error={Boolean(formik.errors.name && formik.touched.name)}
       >
         <Input
           value={formik.values.name}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           name="name"
           style={{ marginBottom: "0.5rem" }}
         />
