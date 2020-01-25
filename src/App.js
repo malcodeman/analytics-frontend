@@ -1,8 +1,9 @@
 import React from "react";
-import { ThemeProvider } from "malcomponents";
 import { useQuery } from "@apollo/react-hooks";
 import { Router, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
+import theme from "./themes/lightTheme";
 import queries from "./api/queries";
 import constants from "./constants";
 import GlobalStyle from "./GlobalStyle";
@@ -21,7 +22,7 @@ function App() {
   const isLoggedIn = data.isLoggedIn;
 
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <Router history={history}>
         {isLoggedIn ? (
           <Layout>

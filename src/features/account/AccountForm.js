@@ -1,8 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { FormControl, Input, Button } from "malcomponents";
 import { useMutation } from "@apollo/react-hooks";
+
+import { FormControl } from "../../components/form-control";
+import { Input } from "../../components/input";
+import { Button } from "../../components/button";
 
 import mutations from "../../api/mutations";
 

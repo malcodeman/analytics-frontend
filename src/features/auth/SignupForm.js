@@ -1,9 +1,11 @@
 import React from "react";
-import { Input, Button, FormControl } from "malcomponents";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
 
+import { FormControl } from "../../components/form-control";
+import { Input } from "../../components/input";
+import { Button } from "../../components/button";
 import mutations from "../../api/mutations";
 
 function SignupForm(props) {

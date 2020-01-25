@@ -1,8 +1,11 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { FormControl, Input, Button } from "malcomponents";
 import styled from "styled-components";
+
+import { FormControl } from "../../components/form-control";
+import { Input } from "../../components/input";
+import { Button } from "../../components/button";
 
 const Grid = styled.div`
   display: grid;
