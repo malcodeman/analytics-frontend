@@ -16,6 +16,8 @@
   },
   "homepage": "https://github.com/malcodeman/analytics-frontend#readme",
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.18.0",
     "parcel": "^2.0.0-alpha.3.2"
   },
   "dependencies": {
