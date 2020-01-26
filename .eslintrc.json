@@ -25,5 +25,10 @@
       }
     ],
     "no-use-before-define": ["error", { "functions": true }]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

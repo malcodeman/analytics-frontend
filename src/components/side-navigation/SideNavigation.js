@@ -16,12 +16,9 @@ const List = styled.ul`
 const ListItem = styled.li`
   padding: 0.75rem 0.75rem 0.75rem 1.5rem;
   border-left: 4px solid
-    ${props =>
-      props.active ? props.theme.colors.primary : "transparent"};
+    ${props => (props.active ? props.theme.colors.primary : "transparent")};
   background-color: ${props =>
-    props.active
-      ? props.theme.colors.backgroundInversePrimary
-      : "transparent"};
+    props.active ? props.theme.colors.backgroundInversePrimary : "transparent"};
   background-image: linear-gradient(
     0deg,
     ${props => `${props.theme.colors.backgroundPrimary}E5`},
@@ -67,7 +64,8 @@ function SideNavigation(props) {
 
 SideNavigation.propTypes = {
   items: PropTypes.array,
-  activeItemId: PropTypes.string
+  activeItemId: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 };
 
 SideNavigation.defaultProps = {

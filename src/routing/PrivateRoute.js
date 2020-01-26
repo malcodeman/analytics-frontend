@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 
 function PrivateRoute(props) {
@@ -8,11 +9,16 @@ function PrivateRoute(props) {
     <Route
       exact={exact}
       path={path}
-      render={props =>
-        isAuthorized ? <Component /> : <Redirect to="/login" />
-      }
+      render={() => (isAuthorized ? <Component /> : <Redirect to="/login" />)}
     />
   );
 }
+
+PrivateRoute.propTypes = {
+  exact: PropTypes.bool,
+  path: PropTypes.string,
+  isAuthorized: PropTypes.bool,
+  component: PropTypes.element
+};
 
 export default PrivateRoute;

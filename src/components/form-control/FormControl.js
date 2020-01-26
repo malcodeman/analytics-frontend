@@ -52,7 +52,8 @@ FormControl.propTypes = {
   caption: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
-  positive: PropTypes.bool
+  positive: PropTypes.bool,
+  children: PropTypes.element
 };
 
 FormControl.defaultProps = {

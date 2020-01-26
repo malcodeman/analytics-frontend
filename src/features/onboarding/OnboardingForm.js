@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
@@ -38,7 +39,7 @@ function OnboardingForm(props) {
 
   React.useEffect(() => {
     if (updateUserResult.data && updateUserResult.data.updateUser) {
-      props.onSuccess(updateUserResult.data.updateUser);
+      props.onSuccess && props.onSuccess(updateUserResult.data.updateUser);
     }
   }, [updateUserResult]);
 
@@ -89,5 +90,12 @@ function OnboardingForm(props) {
     </form>
   );
 }
+
+OnboardingForm.propTypes = {
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  company: PropTypes.string,
+  onSuccess: PropTypes.func
+};
 
 export default OnboardingForm;

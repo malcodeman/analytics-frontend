@@ -16,11 +16,9 @@ const FIND_MYSELF_QUERY = gql`
 const FIND_MY_SITES_QUERY = gql`
   {
     findMySites {
-      sites {
-        id
-        name
-        siteId
-      }
+      id
+      name
+      siteId
     }
   }
 `;

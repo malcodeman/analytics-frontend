@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import Button from "../button/Button";
@@ -14,5 +15,9 @@ function ModalButton(props) {
 
   return <StyledModalButton {...props}>{children}</StyledModalButton>;
 }
+
+ModalButton.propTypes = {
+  children: PropTypes.element
+};
 
 export default ModalButton;

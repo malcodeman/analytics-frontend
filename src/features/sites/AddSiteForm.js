@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
@@ -45,10 +46,15 @@ function AddSiteForm(props) {
         />
       </FormControl>
       <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
-        Get site code
+        <span>Get site code</span>
       </Button>
     </form>
   );
 }
+
+AddSiteForm.propTypes = {
+  name: PropTypes.string,
+  onSuccess: PropTypes.func
+};
 
 export default AddSiteForm;

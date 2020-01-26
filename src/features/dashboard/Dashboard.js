@@ -2,7 +2,7 @@ import React from "react";
 
 import { HeadingSmall } from "../../components/typography";
 
-function Dashboard(props) {
+function Dashboard() {
   return (
     <div>
       <HeadingSmall>Dashboard</HeadingSmall>

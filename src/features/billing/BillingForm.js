@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
@@ -99,10 +100,16 @@ function BillingForm(props) {
         </GridItem>
       </Grid>
       <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
-        Save
+        <span>Save</span>
       </Button>
     </form>
   );
 }
+
+BillingForm.propTypes = {
+  cardNumber: PropTypes.string,
+  cardExpiry: PropTypes.string,
+  cardCvc: PropTypes.string
+};
 
 export default BillingForm;

@@ -5,6 +5,8 @@ import { useQuery } from "@apollo/react-hooks";
 import queries from "../../api/queries";
 
 import AccountForm from "./AccountForm";
+import { Spinner } from "../../components/spinner";
+import { ParagraphMedium } from "../../components/typography";
 
 const Wrapper = styled.div`
   margin: 1rem;
@@ -21,6 +23,8 @@ function Account() {
 
   return (
     <Wrapper>
+      {loading && <Spinner />}
+      {error && <ParagraphMedium>{error.message}</ParagraphMedium>}
       <AccountForm
         email={myself.email}
         firstName={myself.firstName}

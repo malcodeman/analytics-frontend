@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
@@ -27,7 +28,7 @@ function SignupForm(props) {
 
   React.useEffect(() => {
     if (signupResult.data && signupResult.data.signup) {
-      props.onSuccess(signupResult.data.signup);
+      props.onSuccess && props.onSuccess(signupResult.data.signup);
     }
   }, [signupResult]);
 
@@ -52,5 +53,10 @@ function SignupForm(props) {
     </form>
   );
 }
+
+SignupForm.propTypes = {
+  email: PropTypes.string,
+  onSuccess: PropTypes.func
+};
 
 export default SignupForm;

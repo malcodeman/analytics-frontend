@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -53,5 +54,9 @@ function Layout(props) {
     </Grid>
   );
 }
+
+Layout.propTypes = {
+  children: PropTypes.element
+};
 
 export default Layout;

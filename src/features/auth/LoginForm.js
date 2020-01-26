@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
@@ -67,5 +68,11 @@ function LoginForm(props) {
     </form>
   );
 }
+
+LoginForm.propTypes = {
+  email: PropTypes.string,
+  password: PropTypes.string,
+  onSuccess: PropTypes.func
+};
 
 export default LoginForm;

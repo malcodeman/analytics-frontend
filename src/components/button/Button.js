@@ -91,7 +91,8 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   isSelected: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  children: PropTypes.element
 };
 
 Button.defaultProps = {

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
@@ -100,10 +101,18 @@ function AccountForm(props) {
         />
       </FormControl>
       <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
-        Save
+        <span>Save</span>
       </Button>
     </form>
   );
 }
+
+AccountForm.propTypes = {
+  email: PropTypes.string,
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
+  company: PropTypes.string,
+  onSuccess: PropTypes.func
+};
 
 export default AccountForm;
