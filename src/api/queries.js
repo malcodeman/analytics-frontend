@@ -27,9 +27,19 @@ const IS_LOGGED_IN = gql`
     isLoggedIn @client
   }
 `;
+const FIND_DASHBOARD_QUERY = gql`
+  query findDashboard($siteId: String!) {
+    findDashboard(siteId: $siteId) {
+      siteId
+      pageViews
+      referrers
+    }
+  }
+`;
 
 export default {
   FIND_MYSELF_QUERY,
   IS_LOGGED_IN,
-  FIND_MY_SITES_QUERY
+  FIND_MY_SITES_QUERY,
+  FIND_DASHBOARD_QUERY
 };
