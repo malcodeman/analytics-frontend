@@ -43,7 +43,7 @@ const ADD_SITE = gql`
   }
 `;
 const DESTROY_SITE = gql`
-  mutation destroySite($siteId: Int!) {
+  mutation destroySite($siteId: String!) {
     destroySite(siteId: $siteId)
   }
 `;

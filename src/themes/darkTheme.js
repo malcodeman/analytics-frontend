@@ -1,5 +1,6 @@
 import typography from "./typography";
 import sizing from "./sizing";
+import borders from "./borders";
 
 const theme = {
   colors: {
@@ -46,7 +47,8 @@ const theme = {
     headerNavigationFill: "#1F1F1F"
   },
   typography,
-  sizing
+  sizing,
+  borders
 };
 
 export default theme;
