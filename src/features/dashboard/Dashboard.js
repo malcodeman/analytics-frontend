@@ -37,12 +37,6 @@ function Dashboard() {
     }
   });
 
-  React.useEffect(() => {
-    if (!util.isEmpty(selectedDashboard)) {
-      findDashboard.refetch();
-    }
-  });
-
   function getOptionLabel(data) {
     return data.name;
   }
