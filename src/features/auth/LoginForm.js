@@ -63,7 +63,7 @@ function LoginForm(props) {
         />
       </FormControl>
       <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
-        Continue with Login Code
+        <span>Continue with Login Code</span>
       </Button>
     </form>
   );

@@ -31,6 +31,7 @@ function Dashboard() {
     if (
       findMySites.data &&
       findMySites.data.findMySites &&
+      findMySites.data.findMySites.length &&
       util.isEmpty(selectedDashboard)
     ) {
       setSelectedDashboard(findMySites.data.findMySites[0]);
@@ -49,10 +50,13 @@ function Dashboard() {
     setSelectedDashboard(data);
   }
 
+  function loadingIndicator() {
+    return <Spinner />;
+  }
+
   return (
     <Wrapper>
       <HeadingSmall>Dashboard</HeadingSmall>
-      {findMySites.loading && <Spinner />}
       {findMySites.error && (
         <ParagraphMedium>{findMySites.error.message}</ParagraphMedium>
       )}
@@ -62,6 +66,10 @@ function Dashboard() {
         options={findMySites.data && findMySites.data.findMySites}
         getOptionLabel={getOptionLabel}
         getOptionValue={getOptionValue}
+        isLoading={findMySites.loading}
+        components={{
+          LoadingIndicator: loadingIndicator
+        }}
       />
       <Data>
         {findDashboard.loading && <Spinner />}

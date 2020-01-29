@@ -36,10 +36,16 @@ const FIND_DASHBOARD_QUERY = gql`
     }
   }
 `;
+const FIND_THEME = gql`
+  query findTheme {
+    theme @client
+  }
+`;
 
 export default {
   FIND_MYSELF_QUERY,
   IS_LOGGED_IN,
   FIND_MY_SITES_QUERY,
-  FIND_DASHBOARD_QUERY
+  FIND_DASHBOARD_QUERY,
+  FIND_THEME
 };

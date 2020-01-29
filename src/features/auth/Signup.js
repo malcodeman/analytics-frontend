@@ -12,6 +12,7 @@ const Container = styled.div`
   grid-template-columns: 1fr;
   align-items: center;
   min-height: 100vh;
+  background-color: ${props => props.theme.colors.backgroundPrimary};
   @media (min-width: 576px) {
     grid-template-columns: 146px auto;
   }

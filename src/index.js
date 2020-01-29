@@ -24,7 +24,10 @@ const client = new ApolloClient({
   }
 });
 cache.writeData({
-  data: { isLoggedIn: Boolean(localStorage.getItem("token")) }
+  data: {
+    isLoggedIn: Boolean(localStorage.getItem("token")),
+    theme: localStorage.getItem("theme") || constants.THEMES.LIGHT
+  }
 });
 
 render(

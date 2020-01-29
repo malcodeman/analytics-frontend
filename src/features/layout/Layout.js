@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useHistory, useLocation } from "react-router-dom";
 
 import { SideNavigation } from "../../components/side-navigation";
+import ThemeSelect from "./ThemeSelect";
 
 const Grid = styled.div`
   display: grid;
@@ -49,6 +50,7 @@ function Layout(props) {
             event.preventDefault(), history.push(item.itemId);
           }}
         />
+        <ThemeSelect />
       </SideNavigationWrapper>
       {children}
     </Grid>

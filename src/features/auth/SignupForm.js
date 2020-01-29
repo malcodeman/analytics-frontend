@@ -48,7 +48,7 @@ function SignupForm(props) {
         />
       </FormControl>
       <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
-        Get started
+        <span>Get started</span>
       </Button>
     </form>
   );

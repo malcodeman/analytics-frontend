@@ -3,7 +3,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { Router, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
-import theme from "./themes/lightTheme";
+import themes from "./themes";
+import constants from "./constants";
 import queries from "./api/queries";
 import GlobalStyle from "./GlobalStyle";
 import history from "./routing/history";
@@ -17,7 +18,12 @@ import Account from "./features/account/Account";
 
 function App() {
   const { data } = useQuery(queries.IS_LOGGED_IN);
+  const findTheme = useQuery(queries.FIND_THEME);
   const isLoggedIn = data.isLoggedIn;
+  const theme =
+    findTheme.data && findTheme.data.theme === constants.THEMES.DARK
+      ? themes.dark
+      : themes.light;
 
   return (
     <ThemeProvider theme={theme}>

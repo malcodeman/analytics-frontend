@@ -12,7 +12,7 @@ const HeadCell = styled.th`
   background-color: ${props => props.theme.colors.tableHeadBackgroundColor};
   color: ${props => props.theme.colors.contentPrimary};
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   text-align: left;
   border-bottom: ${props => props.theme.borders.border300};
   ${props => props.theme.typography.font350};
@@ -21,7 +21,7 @@ const HeadCell = styled.th`
 const BodyCell = styled.td`
   color: ${props => props.theme.colors.contentPrimary};
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   ${props => props.theme.typography.font200};
 `;
 
