@@ -8,8 +8,9 @@ import queries from "../../api/queries";
 import mutations from "../../api/mutations";
 
 import AddSiteForm from "./AddSiteForm";
-import Table from "../../components/table/Table";
+import { Table } from "../../components/table";
 import { Button } from "../../components/button";
+import VerifySiteCode from "./VerifySiteCode";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -22,6 +23,8 @@ const FormWrapper = styled.div`
 function Sites() {
   const findMySites = useQuery(queries.FIND_MY_SITES_QUERY);
   const [destroySite, destroySiteResult] = useMutation(mutations.DESTROY_SITE);
+  const [modal, setModal] = React.useState(false);
+  const [site, setSite] = React.useState({ name: "", siteId: "" });
 
   function renderButton(data) {
     const siteId = data.row.values.siteId;
@@ -70,16 +73,27 @@ function Sites() {
     );
   }
 
+  function onSuccess(data) {
+    setSite(data);
+    setModal(true);
+  }
+
   return (
     <Wrapper>
       <HeadingSmall>Sites</HeadingSmall>
       <FormWrapper>
-        <AddSiteForm />
+        <AddSiteForm onSuccess={onSuccess} />
       </FormWrapper>
       {findMySites.data &&
         findMySites.data.findMySites &&
         findMySites.data.findMySites.length > 0 &&
         renderTable()}
+      <VerifySiteCode
+        isOpen={modal}
+        onClose={() => setModal(false)}
+        name={site.name}
+        siteId={site.siteId}
+      />
     </Wrapper>
   );
 }

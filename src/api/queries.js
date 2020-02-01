@@ -33,6 +33,7 @@ const FIND_DASHBOARD_QUERY = gql`
       siteId
       pageViews
       referrers
+      languages
     }
   }
 `;

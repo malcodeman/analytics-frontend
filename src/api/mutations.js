@@ -39,6 +39,7 @@ const ADD_SITE = gql`
   mutation addSite($name: String!) {
     addSite(name: $name) {
       name
+      siteId
     }
   }
 `;

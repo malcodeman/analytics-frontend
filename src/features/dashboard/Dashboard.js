@@ -81,6 +81,13 @@ function Dashboard() {
               return <span key={item}>{item}</span>;
             })}
         </ParagraphMedium>
+        <ParagraphMedium>
+          Languages :{" "}
+          {data &&
+            data.languages.map(item => {
+              return <span key={item}>{item}</span>;
+            })}
+        </ParagraphMedium>
       </Data>
     </Wrapper>
   );
