@@ -68,7 +68,7 @@ function VerifySiteCode(props) {
           <span>Close</span>
         </ModalButton>
         {isVerified ? (
-          <ModalButton onClick={() => history.push("/")}>
+          <ModalButton onClick={() => history.push(`/?siteId=${siteId}`)}>
             <span>Go to dashboard</span>
           </ModalButton>
         ) : (

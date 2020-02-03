@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
 
 import { HeadingSmall, ParagraphMedium } from "../../components/typography";
 
@@ -18,6 +19,7 @@ const Data = styled.div`
 `;
 
 function Dashboard() {
+  const paramSiteId = util.getParam("siteId");
   const findMySites = useQuery(queries.FIND_MY_SITES_QUERY);
   const [selectedDashboard, setSelectedDashboard] = React.useState({});
   const findDashboard = useQuery(queries.FIND_DASHBOARD_QUERY, {
@@ -26,6 +28,7 @@ function Dashboard() {
   });
   const data =
     findDashboard && findDashboard.data && findDashboard.data.findDashboard;
+  const history = useHistory();
 
   React.useEffect(() => {
     if (
@@ -34,7 +37,11 @@ function Dashboard() {
       findMySites.data.findMySites.length &&
       util.isEmpty(selectedDashboard)
     ) {
-      setSelectedDashboard(findMySites.data.findMySites[0]);
+      const site = findMySites.data.findMySites.find(
+        site => site.siteId === paramSiteId
+      );
+
+      setSelectedDashboard(site || findMySites.data.findMySites[0]);
     }
   });
 
@@ -47,6 +54,10 @@ function Dashboard() {
   }
 
   function onChange(data) {
+    if (paramSiteId) {
+      history.push(`/?siteId=${data.siteId}`);
+    }
+
     setSelectedDashboard(data);
   }
 

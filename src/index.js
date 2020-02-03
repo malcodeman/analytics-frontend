@@ -11,6 +11,7 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   cache,
   uri: constants.GRAPHQL_URI,
+  resolvers: {},
   request: operation => {
     const token = localStorage.getItem("token");
 
