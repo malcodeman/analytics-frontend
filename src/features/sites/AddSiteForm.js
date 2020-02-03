@@ -27,6 +27,7 @@ function AddSiteForm(props) {
   React.useEffect(() => {
     if (addSiteResult.data && addSiteResult.data.addSite) {
       props.onSuccess && props.onSuccess(addSiteResult.data.addSite);
+      formik.resetForm();
     }
   }, [addSiteResult]);
 
@@ -45,7 +46,11 @@ function AddSiteForm(props) {
           style={{ marginBottom: "0.5rem" }}
         />
       </FormControl>
-      <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
+      <Button
+        type="submit"
+        disabled={!formik.isValid || !formik.dirty}
+        isLoading={addSiteResult.loading}
+      >
         <span>Get site code</span>
       </Button>
     </form>

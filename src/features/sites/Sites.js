@@ -22,7 +22,9 @@ const FormWrapper = styled.div`
 
 function Sites() {
   const findMySites = useQuery(queries.FIND_MY_SITES_QUERY);
-  const [destroySite, destroySiteResult] = useMutation(mutations.DESTROY_SITE);
+  const [destroySite, destroySiteResult] = useMutation(mutations.DESTROY_SITE, {
+    onCompleted: () => findMySites.refetch()
+  });
   const [modal, setModal] = React.useState(false);
   const [site, setSite] = React.useState({ name: "", siteId: "" });
 
@@ -30,29 +32,29 @@ function Sites() {
     const siteId = data.row.values.siteId;
 
     return (
-      <Button onClick={() => destroySite({ variables: { siteId } })}>
+      <Button
+        onClick={() => destroySite({ variables: { siteId } })}
+        isLoading={destroySiteResult.loading}
+      >
         <span>Delete</span>
       </Button>
     );
   }
 
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: "Name",
-        accessor: "name"
-      },
-      {
-        Header: "Site ID",
-        accessor: "siteId"
-      },
-      {
-        Header: "Delete",
-        Cell: renderButton
-      }
-    ],
-    []
-  );
+  const columns = [
+    {
+      Header: "Name",
+      accessor: "name"
+    },
+    {
+      Header: "Site ID",
+      accessor: "siteId"
+    },
+    {
+      Header: "Delete",
+      Cell: renderButton
+    }
+  ];
 
   function renderTable() {
     return (
@@ -74,6 +76,7 @@ function Sites() {
   }
 
   function onSuccess(data) {
+    findMySites.refetch();
     setSite(data);
     setModal(true);
   }
