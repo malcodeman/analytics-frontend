@@ -41,9 +41,23 @@ function Dashboard() {
     skip: util.isEmpty(selectedDashboard),
     variables: { siteId: selectedDashboard.siteId }
   });
-  const data =
-    findDashboard && findDashboard.data && findDashboard.data.findDashboard;
   const findCharts = useQuery(queries.FIND_CHARTS_QUERY, {
+    skip: util.isEmpty(selectedDashboard),
+    variables: {
+      siteId: selectedDashboard.siteId,
+      from: startDate,
+      to: endDate
+    }
+  });
+  const findBrowsers = useQuery(queries.FIND_BROWSERS_QUERY, {
+    skip: util.isEmpty(selectedDashboard),
+    variables: {
+      siteId: selectedDashboard.siteId,
+      from: startDate,
+      to: endDate
+    }
+  });
+  const findOs = useQuery(queries.FIND_OS_QUERY, {
     skip: util.isEmpty(selectedDashboard),
     variables: {
       siteId: selectedDashboard.siteId,
@@ -58,6 +72,22 @@ function Dashboard() {
       return {
         x: format(item.date, "dd/MM"),
         y: item.pageViews
+      };
+    });
+  const browsers =
+    findBrowsers.data &&
+    findBrowsers.data.findBrowsers.map(item => {
+      return {
+        x: item.label,
+        y: item.total
+      };
+    });
+  const os =
+    findOs.data &&
+    findOs.data.findOs.map(item => {
+      return {
+        x: item.label,
+        y: item.total
       };
     });
 
@@ -114,25 +144,16 @@ function Dashboard() {
         }}
       />
       <Data>
-        {findDashboard.loading && <Spinner />}
         <ChartsGrid>
-          <BarChart data={charts} />
+          {findCharts.loading && <Spinner />}
+          <BarChart data={charts} alignment="start" />
         </ChartsGrid>
-        <ParagraphMedium>Page views: {data && data.pageViews}</ParagraphMedium>
-        <ParagraphMedium>
-          Referrers :{" "}
-          {data &&
-            data.referrers.map(item => {
-              return <span key={item}>{item}</span>;
-            })}
-        </ParagraphMedium>
-        <ParagraphMedium>
-          Languages :{" "}
-          {data &&
-            data.languages.map(item => {
-              return <span key={item}>{item}</span>;
-            })}
-        </ParagraphMedium>
+        <ChartsGrid>
+          {findBrowsers.loading && <Spinner />}
+          {findOs.loading && <Spinner />}
+          <BarChart data={browsers} horizontal={true} padding={60} />
+          <BarChart data={os} horizontal={true} padding={60} />
+        </ChartsGrid>
       </Data>
     </Wrapper>
   );

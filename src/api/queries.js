@@ -45,6 +45,22 @@ const FIND_CHARTS_QUERY = gql`
     }
   }
 `;
+const FIND_BROWSERS_QUERY = gql`
+  query findBrowsers($siteId: String!, $from: String, $to: String) {
+    findBrowsers(siteId: $siteId, from: $from, to: $to) {
+      label
+      total
+    }
+  }
+`;
+const FIND_OS_QUERY = gql`
+  query findOs($siteId: String!, $from: String, $to: String) {
+    findOs(siteId: $siteId, from: $from, to: $to) {
+      label
+      total
+    }
+  }
+`;
 const FIND_THEME = gql`
   query findTheme {
     theme @client
@@ -57,5 +73,7 @@ export default {
   FIND_MY_SITES_QUERY,
   FIND_DASHBOARD_QUERY,
   FIND_CHARTS_QUERY,
+  FIND_BROWSERS_QUERY,
+  FIND_OS_QUERY,
   FIND_THEME
 };
