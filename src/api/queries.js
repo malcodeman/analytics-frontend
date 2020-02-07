@@ -37,6 +37,14 @@ const FIND_DASHBOARD_QUERY = gql`
     }
   }
 `;
+const FIND_CHARTS_QUERY = gql`
+  query findCharts($siteId: String!, $from: String, $to: String) {
+    findCharts(siteId: $siteId, from: $from, to: $to) {
+      pageViews
+      date
+    }
+  }
+`;
 const FIND_THEME = gql`
   query findTheme {
     theme @client
@@ -48,5 +56,6 @@ export default {
   IS_LOGGED_IN,
   FIND_MY_SITES_QUERY,
   FIND_DASHBOARD_QUERY,
+  FIND_CHARTS_QUERY,
   FIND_THEME
 };
