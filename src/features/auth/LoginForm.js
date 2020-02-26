@@ -3,11 +3,20 @@ import PropTypes from "prop-types";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@apollo/react-hooks";
+import styled from "styled-components";
 
 import { FormControl } from "../../components/form-control";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import mutations from "../../api/mutations";
+
+const FormWrapper = styled.div`
+  margin-bottom: 1rem;
+`;
+
+const StyledButton = styled(Button)`
+  width: 100%;
+`;
 
 function LoginForm(props) {
   const [login, loginResult] = useMutation(mutations.LOGIN_MUTATION);
@@ -36,35 +45,35 @@ function LoginForm(props) {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <FormControl
-        label="Your email"
-        caption={formik.touched.email && formik.errors.email}
-        error={Boolean(formik.errors.email && formik.touched.email)}
-      >
-        <Input
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          name="email"
-          style={{ marginBottom: "0.5rem" }}
-        />
-      </FormControl>
-      <FormControl
-        label="Login code"
-        caption={formik.touched.password && formik.errors.password}
-        error={Boolean(formik.errors.password && formik.touched.password)}
-      >
-        <Input
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          name="password"
-          style={{ marginBottom: "0.5rem" }}
-        />
-      </FormControl>
-      <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
+      <FormWrapper>
+        <FormControl
+          label="Your email"
+          caption={formik.touched.email && formik.errors.email}
+          error={Boolean(formik.errors.email && formik.touched.email)}
+        >
+          <Input
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="email"
+          />
+        </FormControl>
+        <FormControl
+          label="Login code"
+          caption={formik.touched.password && formik.errors.password}
+          error={Boolean(formik.errors.password && formik.touched.password)}
+        >
+          <Input
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="password"
+          />
+        </FormControl>
+      </FormWrapper>
+      <StyledButton type="submit" disabled={!formik.isValid || !formik.dirty}>
         <span>Continue with Login Code</span>
-      </Button>
+      </StyledButton>
     </form>
   );
 }

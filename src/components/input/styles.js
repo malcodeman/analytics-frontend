@@ -64,6 +64,7 @@ export const getInputStyles = css`
   ::placeholder {
     color: ${props => props.theme.colors.foregroundAlt};
   }
+  border-radius: ${props => props.theme.borders.radius200};
   ${getFont};
   ${getColors};
 `;

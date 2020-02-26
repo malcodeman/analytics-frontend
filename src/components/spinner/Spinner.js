@@ -12,12 +12,15 @@ const rotate = keyframes`
 `;
 
 const StyledSpinner = styled.div`
-  animation ${rotate} 1s linear infinite;
+  animation: ${rotate} 1s linear infinite;
   border-radius: 50%;
-  border-left: 2px solid transparent;
-  border-top: 2px solid ${props => props.color || props.theme.colors.accent};
-  border-right: 2px solid ${props => props.color || props.theme.colors.accent};
-  border-bottom: 2px solid ${props => props.color || props.theme.colors.accent};
+  border-left: 2px solid ${props => props.color || props.theme.colors.accent};
+  border-top: 2px solid
+    ${props => props.color || `${props.theme.colors.spinnerTrackFill}19`};
+  border-right: 2px solid
+    ${props => props.color || `${props.theme.colors.spinnerTrackFill}19`};
+  border-bottom: 2px solid
+    ${props => props.color || `${props.theme.colors.spinnerTrackFill}19`};
   height: ${props => props.size};
   width: ${props => props.size};
 `;

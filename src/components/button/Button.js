@@ -53,12 +53,13 @@ const StyledButton = styled.button`
   border: 0;
   cursor: pointer;
   outline: 0;
-  padding: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
   :disabled {
     cursor: not-allowed;
     background-color: ${props => props.theme.colors.buttonDisabledFill};
     color: ${props => props.theme.colors.buttonDisabledText};
   }
+  border-radius: ${props => props.theme.borders.radius200};
   ${getFontStyles};
   ${getKindStyles};
 `;

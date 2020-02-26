@@ -26,7 +26,8 @@ function getColor(props) {
 }
 
 const Caption = styled.div`
-  margin: 8px 0;
+  margin: 0.5rem 0;
+  animation: ${props => props.theme.animations.bounceIn};
   color: ${getColor};
   ${props => props.theme.typography.font100}
 `;
