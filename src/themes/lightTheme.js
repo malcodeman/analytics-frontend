@@ -1,6 +1,7 @@
 import typography from "./typography";
 import sizing from "./sizing";
 import borders from "./borders";
+import animations from "./animations";
 
 const theme = {
   colors: {
@@ -16,7 +17,7 @@ const theme = {
     foregroundAlt: "#545454",
     border: "#CBCBCB",
     borderFocus: "#000000",
-    buttonPrimaryFill: "#000000",
+    buttonPrimaryFill: "#276EF1",
     buttonPrimarySelectedFill: "#545454",
     buttonPrimaryText: "#FFFFFF",
     buttonPrimarySelectedText: "#FFFFFF",
@@ -44,11 +45,13 @@ const theme = {
     notificationNegativeText: "#AE372A",
     tableBackground: "#FFFFFF",
     tableHeadBackgroundColor: "#FFFFFF",
-    headerNavigationFill: "transparent"
+    headerNavigationFill: "transparent",
+    spinnerTrackFill: "#333333"
   },
   typography,
   sizing,
-  borders
+  borders,
+  animations
 };
 
 export default theme;

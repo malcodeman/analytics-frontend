@@ -1,37 +1,56 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useApolloClient } from "@apollo/react-hooks";
 
-import bg from "./bg.jpg";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import {
+  ParagraphMedium,
+  ParagraphSmall,
+  HeadingLarge
+} from "../../components/typography";
+import LogoIcon from "../../icons/Logo";
+import constants from "../../constants";
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
   min-height: 100vh;
   background-color: ${props => props.theme.colors.backgroundPrimary};
-  @media (min-width: 576px) {
-    grid-template-columns: 146px auto;
+`;
+
+const Header = styled.header`
+  padding: 2rem 2rem 1rem 2rem;
+`;
+
+const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${props => props.theme.colors.primary};
+`;
+
+const StyledLogoIcon = styled(LogoIcon)`
+  margin-right: 0.5rem;
+`;
+
+const Main = styled.main`
+  padding: 1rem;
+  @media (min-width: ${constants.BREAKPOINTS.SMALL_DEVICES}) {
+    margin: 0 auto;
+    max-width: 24rem;
+    width: 100%;
   }
 `;
 
-const Image = styled.div`
-  background-image: url(${bg});
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-  display: none;
-  @media (min-width: 576px) {
-    display: block;
-  }
+const HeadingWrapper = styled.div`
+  text-align: center;
 `;
 
-const FormWrapper = styled.div`
-  margin: 1rem;
-  max-width: 576px;
+const StyledHeadingLarge = styled(HeadingLarge)`
+  font-family: Bebas Neue;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${props => props.theme.colors.accent};
 `;
 
 function Signup() {
@@ -53,14 +72,27 @@ function Signup() {
 
   return (
     <Container>
-      <Image />
-      <FormWrapper>
+      <Header>
+        <LogoWrapper>
+          <StyledLogoIcon />
+          <ParagraphMedium>{constants.NAME}</ParagraphMedium>
+        </LogoWrapper>
+      </Header>
+      <Main>
+        <HeadingWrapper>
+          <StyledHeadingLarge>A little bit about you</StyledHeadingLarge>
+          <ParagraphMedium>Let’s get your account set up!</ParagraphMedium>
+          <ParagraphSmall>
+            Already have an account?{" "}
+            <StyledLink to="/login">Sign in here</StyledLink>
+          </ParagraphSmall>
+        </HeadingWrapper>
         {showLoginForm ? (
           <LoginForm email={email} onSuccess={onLoginSuccess} />
         ) : (
           <SignupForm onSuccess={onSignupSuccess} />
         )}
-      </FormWrapper>
+      </Main>
     </Container>
   );
 }
