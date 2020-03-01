@@ -9,7 +9,7 @@ import {
   HeadingLarge
 } from "../../components/typography";
 import constants from "../../constants";
-import Logo from "./Logo";
+import Logo from "../common/Logo";
 
 const Container = styled.div`
   min-height: 100vh;

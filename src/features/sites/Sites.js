@@ -13,7 +13,7 @@ import { Button } from "../../components/button";
 import VerifySiteCode from "./VerifySiteCode";
 
 const Wrapper = styled.div`
-  padding: 1rem;
+  padding: 1rem 0;
 `;
 
 const FormWrapper = styled.div`

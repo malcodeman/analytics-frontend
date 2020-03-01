@@ -1,59 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { useHistory, useLocation } from "react-router-dom";
 
-import { SideNavigation } from "../../components/side-navigation";
-import ThemeSelect from "./ThemeSelect";
+import constants from "../../constants";
+import Header from "./Header";
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 146px 1fr;
-  min-height: 100vh;
+const Main = styled.main`
+  margin-top: 48px;
+  min-height: calc(100vh - 48px);
   background-color: ${props => props.theme.colors.backgroundPrimary};
 `;
 
-const SideNavigationWrapper = styled.div`
-  height: 100%;
-  background-color: #151b26;
+const Container = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem;
+  max-width: ${constants.BREAKPOINTS.EXTRA_LARGE_DEVICES};
 `;
 
 function Layout(props) {
   const { children } = props;
-  const history = useHistory();
-  const location = useLocation();
 
   return (
-    <Grid>
-      <SideNavigationWrapper>
-        <SideNavigation
-          activeItemId={location.pathname}
-          items={[
-            {
-              itemId: "/",
-              title: "Dashboard"
-            },
-            {
-              itemId: "/sites",
-              title: "Sites"
-            },
-            {
-              itemId: "/billing",
-              title: "Billing"
-            },
-            {
-              itemId: "/account",
-              title: "Account"
-            }
-          ]}
-          onChange={({ event, item }) => {
-            event.preventDefault(), history.push(item.itemId);
-          }}
-        />
-        <ThemeSelect />
-      </SideNavigationWrapper>
-      {children}
-    </Grid>
+    <>
+      <Header />
+      <Main>
+        <Container>{children}</Container>
+      </Main>
+    </>
   );
 }
 

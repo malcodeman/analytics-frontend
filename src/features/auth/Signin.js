@@ -8,7 +8,7 @@ import EmailForm from "./EmailForm";
 import constants from "../../constants";
 import util from "../../util";
 import SigninForm from "./SigninForm";
-import Logo from "./Logo";
+import Logo from "../common/Logo";
 
 const Container = styled.div`
   min-height: 100vh;

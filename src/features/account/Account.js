@@ -7,9 +7,12 @@ import queries from "../../api/queries";
 import AccountForm from "./AccountForm";
 import { Spinner } from "../../components/spinner";
 import { ParagraphMedium } from "../../components/typography";
+import constants from "../../constants";
 
 const Wrapper = styled.div`
-  margin: 1rem;
+  padding: 1rem 0;
+  width: 100%;
+  max-width: ${constants.BREAKPOINTS.SMALL_DEVICES};
 `;
 
 function Account() {
