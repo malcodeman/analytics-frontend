@@ -9,7 +9,7 @@ function PrivateRoute(props) {
     <Route
       exact={exact}
       path={path}
-      render={() => (isAuthorized ? <Component /> : <Redirect to="/login" />)}
+      render={() => (isAuthorized ? <Component /> : <Redirect to="/signin" />)}
     />
   );
 }

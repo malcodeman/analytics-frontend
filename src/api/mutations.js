@@ -30,6 +30,14 @@ const LOGIN_MUTATION = gql`
     }
   }
 `;
+const SEND_TEMPORARY_PASSWORD_MUTATION = gql`
+  mutation sendTemporaryPassword($email: String!) {
+    sendTemporaryPassword(email: $email) {
+      id
+      email
+    }
+  }
+`;
 const UPDATE_USER_MUTATION = gql`
   mutation updateUser(
     $firstName: String!
@@ -62,6 +70,7 @@ const DESTROY_SITE = gql`
 export default {
   SIGNUP_MUTATION,
   LOGIN_MUTATION,
+  SEND_TEMPORARY_PASSWORD_MUTATION,
   UPDATE_USER_MUTATION,
   ADD_SITE,
   DESTROY_SITE

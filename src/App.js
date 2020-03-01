@@ -9,6 +9,7 @@ import queries from "./api/queries";
 import GlobalStyle from "./GlobalStyle";
 import history from "./routing/history";
 import Signup from "./features/auth/Signup";
+import Signin from "./features/auth/Signin";
 import Onboarding from "./features/onboarding/Onboarding";
 import Dashboard from "./features/dashboard/Dashboard";
 import Layout from "./features/layout/Layout";
@@ -39,7 +40,11 @@ function App() {
             </>
           </Layout>
         ) : (
-          <Route exact path="/" component={Signup} />
+          <>
+            <Route exact path="/" component={Signup} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/signin" component={Signin} />
+          </>
         )}
       </Router>
       <GlobalStyle />

@@ -18,20 +18,20 @@ const StyledButton = styled(Button)`
   width: 100%;
 `;
 
-function LoginForm(props) {
+function SigninForm(props) {
   const [login, loginResult] = useMutation(mutations.LOGIN_MUTATION);
-  const loginSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Email is invalid")
       .required("Email is required"),
     password: Yup.string().required("Login code is required")
   });
   const formik = useFormik({
+    validationSchema,
     initialValues: {
       email: props.email || "",
       password: props.password || ""
     },
-    validationSchema: loginSchema,
     onSubmit: values => {
       login({ variables: { email: values.email, password: values.password } });
     }
@@ -43,6 +43,12 @@ function LoginForm(props) {
     }
   }, [loginResult]);
 
+  React.useEffect(() => {
+    if (loginResult.error) {
+      formik.setFieldError("password", loginResult.error.message);
+    }
+  }, [loginResult]);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormWrapper>
@@ -50,6 +56,7 @@ function LoginForm(props) {
           label="Your email"
           caption={formik.touched.email && formik.errors.email}
           error={Boolean(formik.errors.email && formik.touched.email)}
+          disabled
         >
           <Input
             value={formik.values.email}
@@ -78,10 +85,10 @@ function LoginForm(props) {
   );
 }
 
-LoginForm.propTypes = {
+SigninForm.propTypes = {
   email: PropTypes.string,
   password: PropTypes.string,
   onSuccess: PropTypes.func
 };
 
-export default LoginForm;
+export default SigninForm;

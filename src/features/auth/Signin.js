@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory, Link } from "react-router-dom";
+import { useApolloClient } from "@apollo/react-hooks";
 
-import SignupForm from "./SignupForm";
-import {
-  ParagraphMedium,
-  ParagraphSmall,
-  HeadingLarge
-} from "../../components/typography";
+import { ParagraphSmall, HeadingLarge } from "../../components/typography";
+import EmailForm from "./EmailForm";
 import constants from "../../constants";
+import util from "../../util";
+import SigninForm from "./SigninForm";
 import Logo from "./Logo";
 
 const Container = styled.div`
@@ -43,11 +42,19 @@ const StyledLink = styled(Link)`
   color: ${props => props.theme.colors.accent};
 `;
 
-function Signup() {
+function Signin() {
+  const client = useApolloClient();
   const history = useHistory();
+  const emailParam = util.getParam("email");
 
-  function onSignupSuccess(data) {
-    history.push(`/signin?email=${data.email}`);
+  function onSigninSuccess(data) {
+    localStorage.setItem("token", data.token);
+    client.writeData({ data: { isLoggedIn: true } });
+    history.push("/");
+  }
+
+  function onEmailSuccess(values) {
+    history.push(`/signin?email=${values.email}`);
   }
 
   return (
@@ -57,17 +64,22 @@ function Signup() {
       </Header>
       <Main>
         <HeadingWrapper>
-          <StyledHeadingLarge>A little bit about you</StyledHeadingLarge>
-          <ParagraphMedium>Let’s get your account set up!</ParagraphMedium>
-          <ParagraphSmall>
-            Already have an account?{" "}
-            <StyledLink to="/signin">Sign in here</StyledLink>
-          </ParagraphSmall>
+          <StyledHeadingLarge>Sign in</StyledHeadingLarge>
+          {!emailParam && (
+            <ParagraphSmall>
+              Don’t have an account?{" "}
+              <StyledLink to="/signup">Sign up here</StyledLink>
+            </ParagraphSmall>
+          )}
         </HeadingWrapper>
-        <SignupForm onSuccess={onSignupSuccess} />
+        {emailParam ? (
+          <SigninForm email={emailParam} onSuccess={onSigninSuccess} />
+        ) : (
+          <EmailForm onSuccess={onEmailSuccess} />
+        )}
       </Main>
     </Container>
   );
 }
 
-export default Signup;
+export default Signin;

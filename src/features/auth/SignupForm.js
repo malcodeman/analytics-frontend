@@ -64,6 +64,12 @@ function SignupForm(props) {
     }
   }, [signupResult]);
 
+  React.useEffect(() => {
+    if (signupResult.error) {
+      formik.setFieldError("email", signupResult.error.message);
+    }
+  }, [signupResult]);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormGrid>
