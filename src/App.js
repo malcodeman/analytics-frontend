@@ -10,7 +10,6 @@ import GlobalStyle from "./GlobalStyle";
 import history from "./routing/history";
 import Signup from "./features/auth/Signup";
 import Signin from "./features/auth/Signin";
-import Onboarding from "./features/onboarding/Onboarding";
 import Dashboard from "./features/dashboard/Dashboard";
 import Layout from "./features/layout/Layout";
 import Sites from "./features/sites/Sites";
@@ -36,7 +35,6 @@ function App() {
               <Route path="/sites" component={Sites} />
               <Route path="/billing" component={Billing} />
               <Route path="/account" component={Account} />
-              <Route path="/onboarding" component={Onboarding} />
             </>
           </Layout>
         ) : (

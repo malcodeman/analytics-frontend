@@ -28,6 +28,7 @@ const Wrapper = styled.div`
 const Dialog = styled.div`
   margin: 1rem;
   width: ${props => SIZE_WIDTH[props.size]};
+  border-radius: ${props => props.theme.borders.radius200};
   background-color: ${props => props.theme.colors.backgroundPrimary};
 `;
 

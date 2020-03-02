@@ -16,9 +16,12 @@ const FIND_MYSELF_QUERY = gql`
 const FIND_MY_SITES_QUERY = gql`
   {
     findMySites {
-      id
       name
       siteId
+      domain
+      uniqueVisits
+      pageViews
+      bounceRate
     }
   }
 `;

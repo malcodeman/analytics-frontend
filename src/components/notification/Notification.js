@@ -46,7 +46,11 @@ const StyledNofitication = styled.div`
 function Notification(props) {
   const { kind, children } = props;
 
-  return <StyledNofitication kind={kind}>{children}</StyledNofitication>;
+  return (
+    <StyledNofitication {...props} kind={kind}>
+      {children}
+    </StyledNofitication>
+  );
 }
 
 Notification.propTypes = {

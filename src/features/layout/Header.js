@@ -11,6 +11,7 @@ const StyledHeader = styled.header`
   left: 0px;
   right: 0px;
   box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 0px 0px;
+  z-index: 1;
   background-color: ${props => props.theme.colors.headerNavigationFill};
 `;
 

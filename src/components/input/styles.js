@@ -45,7 +45,7 @@ export const getInputStyles = css`
   border-style: solid;
   outline: 0;
   max-width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
   width: 100%;
   :disabled {
     cursor: not-allowed;

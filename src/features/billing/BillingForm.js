@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { FormControl } from "../../components/form-control";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
+import constants from "../../constants";
 
 const Grid = styled.div`
   display: grid;
@@ -17,7 +18,7 @@ const Grid = styled.div`
     "ccCvc";
   gap: 0.5rem;
   margin-bottom: 0.5rem;
-  @media (min-width: 576px) {
+  @media (min-width: ${constants.BREAKPOINTS.SMALL_DEVICES}) {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "ccNumber ccNumber"

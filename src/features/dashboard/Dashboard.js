@@ -11,6 +11,7 @@ import util from "../../util";
 import Spinner from "../../components/spinner/Spinner";
 import Select from "../../components/select/Select";
 import BarChart from "./BarChart";
+import constants from "../../constants";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -24,7 +25,7 @@ const ChartsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  @media (min-width: 768px) {
+  @media (min-width: ${constants.BREAKPOINTS.MEDIUM_DEVICES}) {
     grid-template-columns: 1fr 1fr;
   }
 `;
