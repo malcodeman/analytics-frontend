@@ -6,7 +6,7 @@ import queries from "../../api/queries";
 
 import Site from "./Site";
 import AddSiteButton from "./AddSiteButton";
-
+import { Spinner } from "../../components/spinner";
 import AddSiteModal from "./AddSiteModal";
 import Sidebar from "./Sidebar";
 import { VIEWS } from "./constants";
@@ -45,6 +45,7 @@ function Sites() {
         <Sidebar view={view} setView={setView} />
       </SidebarWrapper>
       <Grid>
+        {findMySites.loading && <Spinner />}
         {findMySites.data &&
           findMySites.data.findMySites &&
           findMySites.data.findMySites.map(site => {

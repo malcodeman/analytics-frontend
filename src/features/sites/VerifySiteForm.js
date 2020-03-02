@@ -22,7 +22,8 @@ function VerifySiteForm(props) {
     queries.FIND_DASHBOARD_QUERY,
     {
       skip: !siteId,
-      variables: { siteId }
+      variables: { siteId },
+      notifyOnNetworkStatusChange: true
     }
   );
 
@@ -41,8 +42,8 @@ function VerifySiteForm(props) {
       <FormControl label="HTML embed code">
         <StyledTextarea value={code} />
       </FormControl>
-      <Button isLoading={loading} onClick={() => refetch()}>
-        <span>Verify site code</span>
+      <Button onClick={() => refetch()}>
+        <span>{loading ? "Verifying" : "Verify site code"}</span>
       </Button>
     </>
   );

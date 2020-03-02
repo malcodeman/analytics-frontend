@@ -52,8 +52,7 @@ function AddSiteForm(props) {
       </FormControl>
       <Button
         type="submit"
-        disabled={!formik.isValid || !formik.dirty}
-        isLoading={addSiteResult.loading}
+        disabled={!formik.isValid || !formik.dirty || addSiteResult.loading}
       >
         <span>Get site code</span>
       </Button>

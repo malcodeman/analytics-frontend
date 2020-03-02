@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import Spinner from "../spinner/Spinner";
 import { KIND, SIZE } from "./constants";
 
 function getFontStyles(props) {
@@ -81,7 +80,7 @@ function Button(props) {
       disabled={disabled}
       onClick={internalOnClick}
     >
-      {isLoading ? <Spinner /> : children}
+      {children}
     </StyledButton>
   );
 }
