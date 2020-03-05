@@ -56,9 +56,8 @@ function Header() {
             <Logo />
           </LogoWrapper>
           <StyledNavLink exact to="/">
-            Dashboard
+            Sites
           </StyledNavLink>
-          <StyledNavLink to="/sites">Sites</StyledNavLink>
           <StyledNavLink to="/account">Account</StyledNavLink>
           <StyledNavLink to="/billing">Billing</StyledNavLink>
         </Nav>

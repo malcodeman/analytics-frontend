@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import themes from "./themes";
@@ -30,12 +30,12 @@ function App() {
       <Router history={history}>
         {isLoggedIn ? (
           <Layout>
-            <>
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/sites" component={Sites} />
+            <Switch>
+              <Route exact path="/" component={Sites} />
               <Route path="/billing" component={Billing} />
               <Route path="/account" component={Account} />
-            </>
+              <Route path="/:siteId" component={Dashboard} />
+            </Switch>
           </Layout>
         ) : (
           <>

@@ -19,4 +19,5 @@ yarn install && yarn start
 GRAPHQL_URI=http://localhost:4000/graphql
 ANALYTICS_SCRIPT_SOURCE=https://codepen.io/akwdkaj2dka2j/pen/ExaBOyx.js
 NODE_ENV=development
+MAPBOX_ACCESS_TOKEN=token
 ```

@@ -52,6 +52,7 @@ function Sites() {
             return (
               <Site
                 key={site.siteId}
+                siteId={site.siteId}
                 name={site.name}
                 domain={site.domain}
                 uniqueVisits={site.uniqueVisits}

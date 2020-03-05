@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import { ParagraphSmall, ParagraphXSmall } from "../../components/typography";
 
 const Wrapper = styled.div`
@@ -38,35 +40,38 @@ const StyledParagraphXSmall = styled(ParagraphXSmall)`
 const Header = styled.div``;
 
 function Site(props) {
-  const { name, domain, uniqueVisits, pageViews, bounceRate } = props;
+  const { siteId, name, domain, uniqueVisits, pageViews, bounceRate } = props;
 
   return (
     <Wrapper>
-      <StyledSite>
-        <Header>
-          <ParagraphSmall>{domain}</ParagraphSmall>
-        </Header>
-        <Stats>
-          <Stat>
-            <StyledParagraphXSmall>Unique visits</StyledParagraphXSmall>
-            <ParagraphXSmall>{uniqueVisits}</ParagraphXSmall>
-          </Stat>
-          <Stat>
-            <StyledParagraphXSmall>Page views</StyledParagraphXSmall>
-            <ParagraphXSmall>{pageViews}</ParagraphXSmall>
-          </Stat>
-          <Stat>
-            <StyledParagraphXSmall>Bounce rate</StyledParagraphXSmall>
-            <ParagraphXSmall>{bounceRate}%</ParagraphXSmall>
-          </Stat>
-        </Stats>
-      </StyledSite>
+      <Link to={`/${siteId}`}>
+        <StyledSite>
+          <Header>
+            <ParagraphSmall>{domain}</ParagraphSmall>
+          </Header>
+          <Stats>
+            <Stat>
+              <StyledParagraphXSmall>Unique visits</StyledParagraphXSmall>
+              <ParagraphXSmall>{uniqueVisits}</ParagraphXSmall>
+            </Stat>
+            <Stat>
+              <StyledParagraphXSmall>Page views</StyledParagraphXSmall>
+              <ParagraphXSmall>{pageViews}</ParagraphXSmall>
+            </Stat>
+            <Stat>
+              <StyledParagraphXSmall>Bounce rate</StyledParagraphXSmall>
+              <ParagraphXSmall>{bounceRate}%</ParagraphXSmall>
+            </Stat>
+          </Stats>
+        </StyledSite>
+      </Link>
       <ParagraphSmall>{name}</ParagraphSmall>
     </Wrapper>
   );
 }
 
 Site.propTypes = {
+  siteId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   domain: PropTypes.string.isRequired,
   uniqueVisits: PropTypes.number.isRequired,
