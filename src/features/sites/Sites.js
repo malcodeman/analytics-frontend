@@ -12,6 +12,8 @@ import { VIEWS } from "./constants";
 import constants from "../../constants";
 import SiteGrid from "./SiteGrid";
 import SiteList from "./SiteList";
+import { ParagraphSmall, ParagraphMedium } from "../../components/typography";
+import util from "../../util";
 
 const Wrapper = styled.div`
   padding: 1rem 0;
@@ -24,6 +26,10 @@ const Wrapper = styled.div`
 
 const SidebarWrapper = styled.div``;
 
+const GridHeader = styled.div`
+  margin-bottom: 0.5rem;
+`;
+
 const Grid = styled.div`
   display: grid;
   grid-gap: 1rem;
@@ -34,20 +40,41 @@ const Grid = styled.div`
 `;
 
 function Sites() {
-  const findMySites = useQuery(queries.FIND_MY_SITES_QUERY);
   const [modal, setModal] = React.useState(false);
   const [view, setView] = React.useState(VIEWS.grid);
+  const [search, setSearch] = React.useState("");
+  const findMySites = useQuery(queries.FIND_MY_SITES_QUERY);
+  const sites = util.getData(findMySites, []);
+  const filteredSites = sites.filter(site => {
+    return (
+      site.name.toLowerCase().includes(search.toLocaleLowerCase()) ||
+      site.domain.toLowerCase().includes(search.toLocaleLowerCase())
+    );
+  });
 
   return (
     <Wrapper>
       <SidebarWrapper>
-        <Sidebar view={view} setView={setView} />
+        <Sidebar
+          search={search}
+          setSearch={setSearch}
+          view={view}
+          setView={setView}
+        />
       </SidebarWrapper>
-      <Grid view={view}>
-        {findMySites.loading && <Spinner />}
-        {findMySites.data &&
-          findMySites.data.findMySites &&
-          findMySites.data.findMySites.map(site => {
+      <div>
+        <GridHeader>
+          {search && filteredSites.length > 0 && (
+            <ParagraphSmall>{`Sites matching "${search}"`}</ParagraphSmall>
+          )}
+          {search && !filteredSites.length && (
+            <ParagraphSmall>No sites found</ParagraphSmall>
+          )}
+          {!search && <ParagraphMedium>Workspace</ParagraphMedium>}
+        </GridHeader>
+        <Grid view={view}>
+          {findMySites.loading && <Spinner />}
+          {filteredSites.map(site => {
             if (view === VIEWS.grid) {
               return (
                 <SiteGrid
@@ -69,8 +96,9 @@ function Sites() {
               />
             );
           })}
-        <AddSiteButton onClick={() => setModal(true)} />
-      </Grid>
+          <AddSiteButton onClick={() => setModal(true)} />
+        </Grid>
+      </div>
       <AddSiteModal
         isOpen={modal}
         onClose={() => setModal(false)}

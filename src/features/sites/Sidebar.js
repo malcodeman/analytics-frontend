@@ -25,11 +25,16 @@ const IconWrapper = styled.div`
 `;
 
 function Sidebar(props) {
-  const { view, setView } = props;
+  const { search, setSearch, view, setView } = props;
 
   return (
     <Wrapper>
-      <Input placeholder="Find a site" />
+      <Input
+        placeholder="Find a site"
+        value={search}
+        onChange={e => setSearch(e.currentTarget.value)}
+      />
+
       <IconWrapper
         selected={view === VIEWS.grid}
         onClick={() => setView(VIEWS.grid)}
@@ -47,6 +52,8 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
+  search: PropTypes.string,
+  setSearch: PropTypes.func,
   view: PropTypes.oneOf([VIEWS.grid, VIEWS.list]),
   setView: PropTypes.func.isRequired
 };

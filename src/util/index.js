@@ -9,7 +9,16 @@ function getParam(myParam) {
   return param;
 }
 
+function getData(object, initial) {
+  if (object && object.data && Object.values(object.data)[0]) {
+    return Object.values(object.data)[0];
+  }
+
+  return initial;
+}
+
 export default {
   isEmpty,
-  getParam
+  getParam,
+  getData
 };
