@@ -9,6 +9,7 @@ import { FormControl } from "../../components/form-control";
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 import mutations from "../../api/mutations";
+import util from "../../util";
 
 const StyledInput = styled(Input)`
   margin-bottom: 0.5rem;
@@ -39,6 +40,18 @@ function AddSiteForm(props) {
       formik.resetForm();
     }
   }, [addSiteResult]);
+
+  async function getHostname(name, domain) {
+    const hostname = await util.getHostname(domain);
+
+    if (!name && hostname) {
+      formik.setFieldValue("name", hostname);
+    }
+  }
+
+  React.useEffect(() => {
+    getHostname(formik.values.name, formik.values.domain);
+  }, [formik.values.domain]);
 
   return (
     <form onSubmit={formik.handleSubmit}>

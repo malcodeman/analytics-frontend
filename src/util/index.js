@@ -1,3 +1,5 @@
+import * as yup from "yup";
+
 function isEmpty(object) {
   return Object.entries(object).length === 0 && object.constructor === Object;
 }
@@ -17,8 +19,25 @@ function getData(object, initial) {
   return initial;
 }
 
+async function getHostname(url) {
+  const schema = yup
+    .string()
+    .required()
+    .url();
+  const valid = await schema.isValid(url);
+
+  if (valid) {
+    const hostname = new URL(url).hostname;
+
+    return hostname;
+  }
+
+  return "";
+}
+
 export default {
   isEmpty,
   getParam,
-  getData
+  getData,
+  getHostname
 };
