@@ -11,8 +11,11 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const StyledSite = styled.div`
+const StyledLink = styled(Link)`
   width: 100%;
+`;
+
+const StyledSite = styled.div`
   padding: 1rem;
   margin-bottom: 0.5rem;
   border-radius: ${props => props.theme.borders.radius200};
@@ -39,12 +42,12 @@ const StyledParagraphXSmall = styled(ParagraphXSmall)`
 
 const Header = styled.div``;
 
-function Site(props) {
+function SiteGrid(props) {
   const { siteId, name, domain, uniqueVisits, pageViews, bounceRate } = props;
 
   return (
     <Wrapper>
-      <Link to={`/${siteId}`}>
+      <StyledLink to={`/${siteId}`}>
         <StyledSite>
           <Header>
             <ParagraphSmall>{domain}</ParagraphSmall>
@@ -64,13 +67,13 @@ function Site(props) {
             </Stat>
           </Stats>
         </StyledSite>
-      </Link>
+      </StyledLink>
       <ParagraphSmall>{name}</ParagraphSmall>
     </Wrapper>
   );
 }
 
-Site.propTypes = {
+SiteGrid.propTypes = {
   siteId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   domain: PropTypes.string.isRequired,
@@ -79,4 +82,4 @@ Site.propTypes = {
   bounceRate: PropTypes.number.isRequired
 };
 
-export default Site;
+export default SiteGrid;

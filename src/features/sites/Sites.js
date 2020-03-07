@@ -4,34 +4,33 @@ import { useQuery } from "@apollo/react-hooks";
 
 import queries from "../../api/queries";
 
-import Site from "./Site";
 import AddSiteButton from "./AddSiteButton";
 import { Spinner } from "../../components/spinner";
 import AddSiteModal from "./AddSiteModal";
 import Sidebar from "./Sidebar";
 import { VIEWS } from "./constants";
 import constants from "../../constants";
+import SiteGrid from "./SiteGrid";
+import SiteList from "./SiteList";
 
 const Wrapper = styled.div`
   padding: 1rem 0;
+  display: grid;
+  grid-gap: 1rem;
   @media (min-width: ${constants.BREAKPOINTS.MEDIUM_DEVICES}) {
-    display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-gap: 1rem;
   }
 `;
 
-const SidebarWrapper = styled.div`
-  display: none;
-  @media (min-width: ${constants.BREAKPOINTS.MEDIUM_DEVICES}) {
-    display: block;
-  }
-`;
+const SidebarWrapper = styled.div``;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   grid-gap: 1rem;
+  grid-template-columns: ${props =>
+    props.view === VIEWS.grid
+      ? "repeat(auto-fill, minmax(256px, 1fr))"
+      : "repeat(auto-fill, minmax(128px, 1fr))"};
 `;
 
 function Sites() {
@@ -44,20 +43,29 @@ function Sites() {
       <SidebarWrapper>
         <Sidebar view={view} setView={setView} />
       </SidebarWrapper>
-      <Grid>
+      <Grid view={view}>
         {findMySites.loading && <Spinner />}
         {findMySites.data &&
           findMySites.data.findMySites &&
           findMySites.data.findMySites.map(site => {
+            if (view === VIEWS.grid) {
+              return (
+                <SiteGrid
+                  key={site.siteId}
+                  siteId={site.siteId}
+                  name={site.name}
+                  domain={site.domain}
+                  uniqueVisits={site.uniqueVisits}
+                  pageViews={site.pageViews}
+                  bounceRate={site.bounceRate}
+                />
+              );
+            }
             return (
-              <Site
+              <SiteList
                 key={site.siteId}
                 siteId={site.siteId}
                 name={site.name}
-                domain={site.domain}
-                uniqueVisits={site.uniqueVisits}
-                pageViews={site.pageViews}
-                bounceRate={site.bounceRate}
               />
             );
           })}
