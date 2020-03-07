@@ -17,15 +17,19 @@ const StyledInput = styled(Input)`
 function AddSiteForm(props) {
   const [addSite, addSiteResult] = useMutation(mutations.ADD_SITE);
   const validationSchema = Yup.object().shape({
+    domain: Yup.string()
+      .required("Domain is required")
+      .url("Invalid URL"),
     name: Yup.string().required("Site name is required")
   });
   const formik = useFormik({
     initialValues: {
+      domain: props.domain || "",
       name: props.name || ""
     },
     validationSchema,
     onSubmit: values => {
-      addSite({ variables: { name: values.name } });
+      addSite({ variables: { name: values.name, domain: values.domain } });
     }
   });
 
@@ -38,6 +42,18 @@ function AddSiteForm(props) {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      <FormControl
+        label="Domain"
+        caption={formik.touched.domain && formik.errors.domain}
+        error={Boolean(formik.errors.domain && formik.touched.domain)}
+      >
+        <StyledInput
+          value={formik.values.domain}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="domain"
+        />
+      </FormControl>
       <FormControl
         label="Site name"
         caption={formik.touched.name && formik.errors.name}
@@ -61,6 +77,7 @@ function AddSiteForm(props) {
 }
 
 AddSiteForm.propTypes = {
+  domain: PropTypes.string,
   name: PropTypes.string,
   onSuccess: PropTypes.func
 };

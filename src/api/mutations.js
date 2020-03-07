@@ -54,8 +54,9 @@ const UPDATE_USER_MUTATION = gql`
   }
 `;
 const ADD_SITE = gql`
-  mutation addSite($name: String!) {
-    addSite(name: $name) {
+  mutation addSite($domain: String!, $name: String!) {
+    addSite(domain: $domain, name: $name) {
+      domain
       name
       siteId
     }
