@@ -9,6 +9,8 @@ import { ParagraphMedium, ParagraphSmall } from "../../components/typography";
 import { useQuery } from "@apollo/react-hooks";
 import queries from "../../api/queries";
 import util from "../../util";
+import image from "../../illustrations/MessageSent.png";
+import ImageTile from "./ImageTile";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -57,6 +59,7 @@ function Dashboard() {
           <Tile label="Bounce rate" value="67%" />
         </Tiles>
         <Map />
+        <ImageTile label="Inbox" value="23" image={image} />
       </Grid>
     </Wrapper>
   );
