@@ -25,6 +25,15 @@ const FIND_MY_SITES_QUERY = gql`
     }
   }
 `;
+const FIND_SITE_QUERY = gql`
+  query findSite($siteId: String!) {
+    findSite(siteId: $siteId) {
+      name
+      siteId
+      domain
+    }
+  }
+`;
 const IS_LOGGED_IN = gql`
   query IsUserLoggedIn {
     isLoggedIn @client
@@ -74,6 +83,7 @@ export default {
   FIND_MYSELF_QUERY,
   IS_LOGGED_IN,
   FIND_MY_SITES_QUERY,
+  FIND_SITE_QUERY,
   FIND_DASHBOARD_QUERY,
   FIND_CHARTS_QUERY,
   FIND_BROWSERS_QUERY,
