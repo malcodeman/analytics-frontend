@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import constants from "../../constants";
-import Header from "./Header";
+import Header from "../header/Header";
 
 const Main = styled.main`
   margin-top: 48px;

@@ -35,9 +35,24 @@ async function getHostname(url) {
   return "";
 }
 
+function mergeRefs(...refs) {
+  return ref => {
+    refs.forEach(resolvableRef => {
+      if (typeof resolvableRef === "function") {
+        resolvableRef(ref);
+      }
+
+      if (resolvableRef) {
+        resolvableRef.current = ref;
+      }
+    });
+  };
+}
+
 export default {
   isEmpty,
   getParam,
   getData,
-  getHostname
+  getHostname,
+  mergeRefs
 };

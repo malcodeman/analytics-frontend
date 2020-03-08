@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import constants from "../../constants";
 import Logo from "../common/Logo";
+import UserPopover from "./UserPopover";
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -47,6 +48,10 @@ const StyledNavLink = styled(NavLink)`
   ${props => props.theme.typography.ParagraphSmall};
 `;
 
+const StyledUserPopover = styled(UserPopover)`
+  margin-left: auto;
+`;
+
 function Header() {
   return (
     <StyledHeader>
@@ -60,6 +65,7 @@ function Header() {
           </StyledNavLink>
           <StyledNavLink to="/account">Account</StyledNavLink>
           <StyledNavLink to="/billing">Billing</StyledNavLink>
+          <StyledUserPopover />
         </Nav>
       </Container>
     </StyledHeader>

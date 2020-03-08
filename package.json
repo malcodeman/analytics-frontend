@@ -37,6 +37,7 @@
     "react-select": "^3.0.8",
     "react-table": "^7.0.0-rc.15",
     "styled-components": "^5.0.0",
+    "use-popper": "^1.1.6",
     "victory": "^34.0.1",
     "yup": "^0.28.0"
   }
