@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { useApolloClient } from "@apollo/react-hooks";
+import { useApolloClient, useQuery } from "@apollo/react-hooks";
 import { useHistory } from "react-router-dom";
 
 import { Popover } from "../../components/popover";
 import UserIcon from "../../icons/User";
 import LogOutIcon from "../../icons/LogOut";
 import { ParagraphSmall } from "../../components/typography";
+import { Switch } from "../../components/switch";
+import queries from "../../api/queries";
+import constants from "../../constants";
 
 const Overlay = styled.div`
   display: flex;
@@ -49,6 +52,7 @@ const StyledParagraphSmall = styled(ParagraphSmall)`
 function UserPopover(props) {
   const client = useApolloClient();
   const history = useHistory();
+  const { data } = useQuery(queries.FIND_THEME);
 
   function handleLogOut() {
     localStorage.removeItem("token");
@@ -56,10 +60,26 @@ function UserPopover(props) {
     history.push("/");
   }
 
+  function toggleTheme() {
+    const theme =
+      data.theme === constants.THEMES.DARK
+        ? constants.THEMES.LIGHT
+        : constants.THEMES.DARK;
+
+    localStorage.setItem("theme", theme);
+    client.writeData({ data: { theme } });
+  }
+
   function overlay() {
     return (
       <Overlay>
         <Menu>
+          <MenuItem onClick={toggleTheme}>
+            <Switch
+              state={data.theme === constants.THEMES.DARK ? true : false}
+            />
+            <StyledParagraphSmall>Dark theme</StyledParagraphSmall>
+          </MenuItem>
           <MenuItem onClick={handleLogOut}>
             <LogOutIcon />
             <StyledParagraphSmall>Log out</StyledParagraphSmall>

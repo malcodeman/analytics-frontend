@@ -44,17 +44,18 @@ function Map() {
       onViewportChange={onViewportChange}
       mapboxApiAccessToken={TOKEN}
     >
-      {CITIES.map((item, index) => {
-        return (
-          <Marker
-            key={index}
-            longitude={item.longitude}
-            latitude={item.latitude}
-          >
-            <MapPinIcon color={theme.colors.primary} />
-          </Marker>
-        );
-      })}
+      {CITIES.length > 0 &&
+        CITIES.map((item, index) => {
+          return (
+            <Marker
+              key={index}
+              longitude={item.longitude}
+              latitude={item.latitude}
+            >
+              <MapPinIcon color={theme.colors.primary} />
+            </Marker>
+          );
+        })}
     </StyledMap>
   );
 }
