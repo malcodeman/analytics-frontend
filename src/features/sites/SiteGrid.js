@@ -30,20 +30,17 @@ const IconWrapper = styled.div`
   cursor: pointer;
   color: ${props => props.theme.colors.primary};
   &:hover {
-    background-color: ${props => props.theme.colors.backgroundSecondary};
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
 const Container = styled.div`
   position: relative;
   margin-bottom: 0.5rem;
+  width: 100%;
   &:hover ${IconWrapper} {
     opacity: 1;
   }
-`;
-
-const StyledLink = styled(Link)`
-  width: 100%;
 `;
 
 const StyledSite = styled.div`
@@ -79,7 +76,7 @@ function SiteGrid(props) {
   return (
     <Wrapper>
       <Container>
-        <StyledLink to={`/${siteId}`}>
+        <Link to={`/${siteId}`}>
           <StyledSite>
             <Header>
               <ParagraphSmall>{domain}</ParagraphSmall>
@@ -99,7 +96,7 @@ function SiteGrid(props) {
               </Stat>
             </Stats>
           </StyledSite>
-        </StyledLink>
+        </Link>
         <SitePopover>
           <IconWrapper>
             <ChevronDownIcon size={12} />
