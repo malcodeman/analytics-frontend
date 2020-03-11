@@ -19,6 +19,7 @@ const StyledButton = styled.div`
   width: 100%;
   padding: 1rem;
   margin-bottom: 0.5rem;
+  transition: 0.085s all ease-in;
   color: ${props => props.theme.colors.contentPrimary};
   border-radius: ${props => props.theme.borders.radius200};
   background-color: ${props => props.theme.colors.backgroundSecondary};

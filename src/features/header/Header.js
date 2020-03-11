@@ -48,7 +48,7 @@ const StyledNavLink = styled(NavLink)`
   ${props => props.theme.typography.ParagraphSmall};
 `;
 
-const StyledUserPopover = styled(UserPopover)`
+const UserPopoverWrapper = styled.div`
   margin-left: auto;
 `;
 
@@ -65,7 +65,9 @@ function Header() {
           </StyledNavLink>
           <StyledNavLink to="/account">Account</StyledNavLink>
           <StyledNavLink to="/billing">Billing</StyledNavLink>
-          <StyledUserPopover />
+          <UserPopoverWrapper>
+            <UserPopover />
+          </UserPopoverWrapper>
         </Nav>
       </Container>
     </StyledHeader>

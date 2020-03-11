@@ -11,6 +11,7 @@ const theme = {
     backgroundPrimary: "#FFFFFF",
     backgroundSecondary: "#F6F6F6",
     backgroundInversePrimary: "#000000",
+    backgroundTertiary: "#EEEEEE",
     contentPrimary: "#000000",
     contentSecondary: "#545454",
     negative: "#D44333",

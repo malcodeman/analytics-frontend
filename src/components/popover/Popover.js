@@ -34,7 +34,6 @@ function Popover(props) {
   return (
     <>
       {cloneElement(children, {
-        ...props,
         ref: reference.ref,
         onClick: handleToggle
       })}
