@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
 import queries from "../../api/queries";
+import mutations from "../../api/mutations";
 
-import AddSiteButton from "./AddSiteButton";
+import AddSiteButtonGrid from "./AddSiteButtonGrid";
+import AddSiteButtonList from "./AddSiteButtonList";
 import { Spinner } from "../../components/spinner";
 import AddSiteModal from "./AddSiteModal";
 import Sidebar from "./Sidebar";
@@ -51,6 +53,16 @@ function Sites() {
       site.domain.toLowerCase().includes(search.toLocaleLowerCase())
     );
   });
+  const [addSite, addSiteResult] = useMutation(mutations.ADD_SITE);
+  const [destroySite, destroySiteResult] = useMutation(mutations.DESTROY_SITE);
+  const duplicated = util.getData(addSiteResult, false);
+  const destroyed = util.getData(destroySiteResult, false);
+
+  React.useEffect(() => {
+    if (duplicated || destroyed) {
+      findMySites.refetch();
+    }
+  }, [duplicated, destroyed]);
 
   return (
     <Wrapper>
@@ -85,6 +97,8 @@ function Sites() {
                   uniqueVisits={site.uniqueVisits}
                   pageViews={site.pageViews}
                   bounceRate={site.bounceRate}
+                  addSite={addSite}
+                  destroySite={destroySite}
                 />
               );
             }
@@ -93,10 +107,17 @@ function Sites() {
                 key={site.siteId}
                 siteId={site.siteId}
                 name={site.name}
+                domain={site.domain}
+                addSite={addSite}
+                destroySite={destroySite}
               />
             );
           })}
-          <AddSiteButton onClick={() => setModal(true)} />
+          {view === VIEWS.grid ? (
+            <AddSiteButtonGrid onClick={() => setModal(true)} />
+          ) : (
+            <AddSiteButtonList onClick={() => setModal(true)} />
+          )}
         </Grid>
       </div>
       <AddSiteModal

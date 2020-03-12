@@ -71,7 +71,16 @@ const StyledParagraphXSmall = styled(ParagraphXSmall)`
 `;
 
 function SiteGrid(props) {
-  const { siteId, name, domain, uniqueVisits, pageViews, bounceRate } = props;
+  const {
+    siteId,
+    name,
+    domain,
+    uniqueVisits,
+    pageViews,
+    bounceRate,
+    addSite,
+    destroySite
+  } = props;
 
   return (
     <Wrapper>
@@ -97,7 +106,13 @@ function SiteGrid(props) {
             </Stats>
           </StyledSite>
         </Link>
-        <SitePopover>
+        <SitePopover
+          name={name}
+          domain={domain}
+          addSite={addSite}
+          destroySite={destroySite}
+          siteId={siteId}
+        >
           <IconWrapper>
             <ChevronDownIcon size={12} />
           </IconWrapper>
@@ -114,7 +129,9 @@ SiteGrid.propTypes = {
   domain: PropTypes.string.isRequired,
   uniqueVisits: PropTypes.number.isRequired,
   pageViews: PropTypes.number.isRequired,
-  bounceRate: PropTypes.number.isRequired
+  bounceRate: PropTypes.number.isRequired,
+  addSite: PropTypes.func.isRequired,
+  destroySite: PropTypes.func.isRequired
 };
 
 export default SiteGrid;

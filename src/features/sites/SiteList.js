@@ -30,8 +30,6 @@ const IconWrapper = styled.div`
 
 const Container = styled.div`
   position: relative;
-  margin-bottom: 0.5rem;
-  width: 100%;
   &:hover ${IconWrapper} {
     opacity: 1;
   }
@@ -40,6 +38,9 @@ const Container = styled.div`
 const StyledSite = styled.div`
   padding: 1rem;
   transition: 0.085s all ease-in;
+  height: 100%;
+  display: flex;
+  align-items: center;
   border-radius: ${props => props.theme.borders.radius200};
   background-color: ${props => props.theme.colors.backgroundSecondary};
   &:hover {
@@ -48,7 +49,7 @@ const StyledSite = styled.div`
 `;
 
 function SiteList(props) {
-  const { siteId, name } = props;
+  const { siteId, name, domain, addSite, destroySite } = props;
 
   return (
     <Container>
@@ -57,7 +58,13 @@ function SiteList(props) {
           <ParagraphSmall>{name}</ParagraphSmall>
         </StyledSite>
       </Link>
-      <SitePopover>
+      <SitePopover
+        name={name}
+        domain={domain}
+        addSite={addSite}
+        destroySite={destroySite}
+        siteId={siteId}
+      >
         <IconWrapper>
           <ChevronDownIcon size={12} />
         </IconWrapper>
@@ -68,7 +75,10 @@ function SiteList(props) {
 
 SiteList.propTypes = {
   siteId: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  domain: PropTypes.string.isRequired,
+  addSite: PropTypes.func.isRequired,
+  destroySite: PropTypes.func.isRequired
 };
 
 export default SiteList;

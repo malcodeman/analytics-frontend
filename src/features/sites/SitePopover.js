@@ -41,15 +41,27 @@ const StyledParagraphSmall = styled(ParagraphSmall)`
 `;
 
 function SitePopover(props) {
-  function overlay() {
+  const { addSite, name, domain, destroySite, siteId } = props;
+
+  function handleAddSite(close) {
+    addSite({ variables: { name: `${name} copy`, domain } });
+    close();
+  }
+
+  function handleDestroySite(close) {
+    destroySite({ variables: { siteId } });
+    close();
+  }
+
+  function overlay(overlayProps) {
     return (
       <Overlay>
         <Menu>
-          <MenuItem>
+          <MenuItem onClick={() => handleAddSite(overlayProps.close)}>
             <CopyIcon />
             <StyledParagraphSmall>Duplicate site</StyledParagraphSmall>
           </MenuItem>
-          <MenuItem>
+          <MenuItem onClick={() => handleDestroySite(overlayProps.close)}>
             <TrashIcon />
             <StyledParagraphSmall>Delete site</StyledParagraphSmall>
           </MenuItem>
@@ -66,6 +78,11 @@ function SitePopover(props) {
 }
 
 SitePopover.propTypes = {
+  name: PropTypes.string.isRequired,
+  domain: PropTypes.string.isRequired,
+  addSite: PropTypes.func.isRequired,
+  destroySite: PropTypes.func.isRequired,
+  siteId: PropTypes.string.isRequired,
   children: PropTypes.element
 };
 

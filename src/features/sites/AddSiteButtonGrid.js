@@ -28,7 +28,7 @@ const StyledButton = styled.div`
   }
 `;
 
-function AddSiteButton(props) {
+function AddSiteButtonGrid(props) {
   return (
     <Wrapper {...props}>
       <StyledButton>
@@ -39,4 +39,4 @@ function AddSiteButton(props) {
   );
 }
 
-export default AddSiteButton;
+export default AddSiteButtonGrid;
