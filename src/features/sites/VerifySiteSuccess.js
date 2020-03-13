@@ -19,7 +19,7 @@ function VerifySiteSuccess(props) {
       <StyledNotification kind={KIND.positive}>
         <span>The tracker is installed</span>
       </StyledNotification>
-      <Button onClick={() => history.push(`/?siteId=${siteId}`)}>
+      <Button onClick={() => history.push(`/${siteId}`)}>
         <span>Go to dashboard</span>
       </Button>
     </>
