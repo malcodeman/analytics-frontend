@@ -5,6 +5,8 @@
 
 Simple analytics for startups.
 
+![Screenshot](docs/images/screenshot.png)
+
 ## Getting started
 
 ```
