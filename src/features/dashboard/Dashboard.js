@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { subMonths } from "date-fns";
 
 import constants from "../../constants";
 import Map from "./Map";
@@ -39,11 +40,29 @@ const Tiles = styled.div`
 function Dashboard() {
   const params = useParams();
   const siteId = params.siteId;
+  const [startDate, setStartDate] = React.useState(
+    subMonths(new Date(), 1).toISOString()
+  );
+  const [endDate, setEndDate] = React.useState(new Date().toISOString());
   const findSite = useQuery(queries.FIND_SITE_QUERY, {
     skip: !siteId,
     variables: { siteId }
   });
+  const findTotals = useQuery(queries.FIND_TOTALS_QUERY, {
+    skip: !siteId,
+    variables: {
+      from: startDate,
+      to: endDate,
+      siteId
+    }
+  });
   const site = util.getData(findSite, {});
+  const totals = util.getData(findTotals, {
+    pageViews: 0,
+    uniqueVisits: 0,
+    avgDuration: 0,
+    bounceRate: 0
+  });
 
   return (
     <Wrapper>
@@ -53,10 +72,26 @@ function Dashboard() {
       </Header>
       <Grid>
         <Tiles>
-          <Tile label="Unique visits" value="33k" />
-          <Tile label="Average time on site" value="02:20" />
-          <Tile label="Page views" value="210k" />
-          <Tile label="Bounce rate" value="67%" />
+          <Tile
+            label="Unique visits"
+            value={totals.uniqueVisits}
+            isLoading={findTotals.loading}
+          />
+          <Tile
+            label="Average time on site"
+            value={totals.avgDuration}
+            isLoading={findTotals.loading}
+          />
+          <Tile
+            label="Page views"
+            value={totals.pageViews}
+            isLoading={findTotals.loading}
+          />
+          <Tile
+            label="Bounce rate"
+            value={totals.bounceRate}
+            isLoading={findTotals.loading}
+          />
         </Tiles>
         <Map />
         <ImageTile label="Inbox" value="23" image={image} />

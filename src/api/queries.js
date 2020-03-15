@@ -65,6 +65,16 @@ const FIND_BROWSERS_QUERY = gql`
     }
   }
 `;
+const FIND_TOTALS_QUERY = gql`
+  query findTotals($siteId: String!, $from: String, $to: String) {
+    findTotals(siteId: $siteId, from: $from, to: $to) {
+      pageViews
+      uniqueVisits
+      avgDuration
+      bounceRate
+    }
+  }
+`;
 const FIND_OS_QUERY = gql`
   query findOs($siteId: String!, $from: String, $to: String) {
     findOs(siteId: $siteId, from: $from, to: $to) {
@@ -87,6 +97,7 @@ export default {
   FIND_DASHBOARD_QUERY,
   FIND_CHARTS_QUERY,
   FIND_BROWSERS_QUERY,
+  FIND_TOTALS_QUERY,
   FIND_OS_QUERY,
   FIND_THEME
 };
