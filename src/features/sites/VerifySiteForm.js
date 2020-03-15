@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import { Button } from "../../components/button";
 import { FormControl } from "../../components/form-control";
 import { Input } from "../../components/input";
 import { Textarea } from "../../components/textarea";
 import constants from "../../constants";
-import queries from "../../api/queries";
 
 const StyledTextarea = styled(Textarea)`
   height: 128px;
@@ -19,7 +19,13 @@ function VerifySiteForm(props) {
   const { siteId } = props;
   const code = `<script defer src="${constants.ANALYTICS_SCRIPT_SOURCE}" siteId="${siteId}" graphqlUri="${constants.GRAPHQL_URI}"></script>`;
   const { loading, error, data, refetch } = useQuery(
-    queries.FIND_DASHBOARD_QUERY,
+    gql`
+      query findSite($siteId: String!) {
+        findSite(siteId: $siteId) {
+          pageViews
+        }
+      }
+    `,
     {
       skip: !siteId,
       variables: { siteId },
@@ -28,8 +34,8 @@ function VerifySiteForm(props) {
   );
 
   React.useEffect(() => {
-    if (data && data.findDashboard && data.findDashboard.pageViews) {
-      props.onSuccess && props.onSuccess(data.findDashboard);
+    if (data && data.findSite && data.findSite.pageViews) {
+      props.onSuccess && props.onSuccess(data.findSite);
     }
   }, [data]);
 
