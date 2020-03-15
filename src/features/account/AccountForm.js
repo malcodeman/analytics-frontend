@@ -101,7 +101,7 @@ function AccountForm(props) {
         />
       </FormControl>
       <Button type="submit" disabled={!formik.isValid || !formik.dirty}>
-        <span>Save</span>
+        <span>{updateUserResult.loading ? "Saving" : "Save"}</span>
       </Button>
     </form>
   );

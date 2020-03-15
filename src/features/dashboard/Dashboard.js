@@ -89,7 +89,7 @@ function Dashboard() {
           />
           <Tile
             label="Bounce rate"
-            value={totals.bounceRate}
+            value={`${totals.bounceRate}%`}
             isLoading={findTotals.loading}
           />
         </Tiles>
