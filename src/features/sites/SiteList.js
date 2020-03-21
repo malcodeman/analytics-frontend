@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 import { ParagraphSmall } from "../../components/typography";
 import ChevronDownIcon from "../../icons/ChevronDown";
@@ -48,16 +47,31 @@ const StyledSite = styled.div`
   }
 `;
 
+const Caption = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+`;
+
 function SiteList(props) {
-  const { siteId, name, domain, addSite, destroySite } = props;
+  const {
+    siteId,
+    name,
+    domain,
+    addSite,
+    destroySite,
+    caption,
+    onClick
+  } = props;
 
   return (
     <Container>
-      <Link to={`/${siteId}`}>
-        <StyledSite>
-          <ParagraphSmall>{name}</ParagraphSmall>
-        </StyledSite>
-      </Link>
+      {caption && <Caption>{caption}</Caption>}
+      <StyledSite onClick={onClick}>
+        <ParagraphSmall>{name}</ParagraphSmall>
+      </StyledSite>
       <SitePopover
         name={name}
         domain={domain}
@@ -78,7 +92,9 @@ SiteList.propTypes = {
   name: PropTypes.string.isRequired,
   domain: PropTypes.string.isRequired,
   addSite: PropTypes.func.isRequired,
-  destroySite: PropTypes.func.isRequired
+  destroySite: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  caption: PropTypes.element
 };
 
 export default SiteList;

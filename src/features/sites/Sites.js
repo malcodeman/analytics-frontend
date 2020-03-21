@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useHistory } from "react-router-dom";
 
 import queries from "../../api/queries";
 import mutations from "../../api/mutations";
@@ -16,6 +17,7 @@ import SiteGrid from "./SiteGrid";
 import SiteList from "./SiteList";
 import { ParagraphSmall, ParagraphMedium } from "../../components/typography";
 import util from "../../util";
+import AlertTriangleIcon from "../../icons/AlertTriangle";
 
 const Wrapper = styled.div`
   padding: 1rem 0;
@@ -41,10 +43,18 @@ const Grid = styled.div`
       : "repeat(auto-fill, minmax(128px, 1fr))"};
 `;
 
+const Alert = styled.div`
+  color: ${props => props.theme.colors.warning};
+`;
+
 function Sites() {
   const [modal, setModal] = React.useState(false);
   const [view, setView] = React.useState(VIEWS.grid);
   const [search, setSearch] = React.useState("");
+  const [current, setCurrent] = React.useState(0);
+  const SITE_INITIAL = { name: "", siteId: "" };
+  const [site, setSite] = React.useState(SITE_INITIAL);
+  const history = useHistory();
   const findMySites = useQuery(queries.FIND_MY_SITES_QUERY);
   const sites = util.getData(findMySites, []);
   const filteredSites = sites.filter(site => {
@@ -63,6 +73,39 @@ function Sites() {
       findMySites.refetch();
     }
   }, [duplicated, destroyed]);
+
+  function renderCaption(site) {
+    if (site.pageViews === 0) {
+      return (
+        <Alert>
+          <AlertTriangleIcon />
+        </Alert>
+      );
+    }
+
+    return null;
+  }
+
+  function handleOnClick(site) {
+    if (site.pageViews === 0) {
+      setCurrent(1);
+      setSite(site);
+    } else {
+      history.push(`/${site.siteId}`);
+    }
+  }
+
+  function onClose() {
+    setSite(SITE_INITIAL);
+    setCurrent(0);
+    setModal(false);
+  }
+
+  React.useEffect(() => {
+    if (current === 1 && site.name) {
+      setModal(true);
+    }
+  }, [current, site]);
 
   return (
     <Wrapper>
@@ -99,6 +142,8 @@ function Sites() {
                   bounceRate={site.bounceRate}
                   addSite={addSite}
                   destroySite={destroySite}
+                  caption={renderCaption(site)}
+                  onClick={() => handleOnClick(site)}
                 />
               );
             }
@@ -110,6 +155,8 @@ function Sites() {
                 domain={site.domain}
                 addSite={addSite}
                 destroySite={destroySite}
+                caption={renderCaption(site)}
+                onClick={() => handleOnClick(site)}
               />
             );
           })}
@@ -122,8 +169,12 @@ function Sites() {
       </div>
       <AddSiteModal
         isOpen={modal}
-        onClose={() => setModal(false)}
+        onClose={onClose}
         refetch={findMySites.refetch}
+        current={current}
+        site={site}
+        setCurrent={setCurrent}
+        setSite={setSite}
       />
     </Wrapper>
   );

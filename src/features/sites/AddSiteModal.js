@@ -7,10 +7,15 @@ import VerifySiteForm from "./VerifySiteForm";
 import VerifySiteSuccess from "./VerifySiteSuccess";
 
 function AddSiteModal(props) {
-  const { isOpen, onClose, refetch } = props;
-  const [current, setCurrent] = React.useState(0);
-  const SITE_INITIAL = { name: "", siteId: "" };
-  const [site, setSite] = React.useState(SITE_INITIAL);
+  const {
+    isOpen,
+    onClose,
+    refetch,
+    current,
+    site,
+    setCurrent,
+    setSite
+  } = props;
 
   function onAddSiteFormSuccess(data) {
     setSite(data);
@@ -20,12 +25,7 @@ function AddSiteModal(props) {
 
   function onVerifySiteFormSuccess() {
     setCurrent(2);
-  }
-
-  function handleOnClose() {
-    setSite(SITE_INITIAL);
-    setCurrent(0);
-    onClose();
+    refetch();
   }
 
   function renderHeader() {
@@ -42,7 +42,7 @@ function AddSiteModal(props) {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={handleOnClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <ModalHeader>{renderHeader()}</ModalHeader>
       <ModalBody>
         {current === 0 && <AddSiteForm onSuccess={onAddSiteFormSuccess} />}
@@ -61,7 +61,11 @@ function AddSiteModal(props) {
 AddSiteModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  refetch: PropTypes.func.isRequired
+  refetch: PropTypes.func.isRequired,
+  current: PropTypes.number.isRequired,
+  site: PropTypes.object.isRequired,
+  setCurrent: PropTypes.func.isRequired,
+  setSite: PropTypes.func.isRequired
 };
 
 export default AddSiteModal;

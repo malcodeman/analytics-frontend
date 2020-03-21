@@ -15,6 +15,7 @@ const theme = {
     contentPrimary: "#000000",
     contentSecondary: "#545454",
     negative: "#D44333",
+    warning: "#FFC043",
     positive: "#3AA76D",
     foreground: "#000000",
     foregroundAlt: "#545454",

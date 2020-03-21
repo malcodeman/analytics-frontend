@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 import { ParagraphSmall, ParagraphXSmall } from "../../components/typography";
 import ChevronDownIcon from "../../icons/ChevronDown";
@@ -70,6 +69,14 @@ const StyledParagraphXSmall = styled(ParagraphXSmall)`
   color: ${props => props.theme.colors.contentSecondary};
 `;
 
+const Caption = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+`;
+
 function SiteGrid(props) {
   const {
     siteId,
@@ -79,33 +86,34 @@ function SiteGrid(props) {
     pageViews,
     bounceRate,
     addSite,
-    destroySite
+    destroySite,
+    caption,
+    onClick
   } = props;
 
   return (
     <Wrapper>
       <Container>
-        <Link to={`/${siteId}`}>
-          <StyledSite>
-            <Header>
-              <ParagraphSmall>{domain}</ParagraphSmall>
-            </Header>
-            <Stats>
-              <Stat>
-                <StyledParagraphXSmall>Unique visits</StyledParagraphXSmall>
-                <ParagraphXSmall>{uniqueVisits}</ParagraphXSmall>
-              </Stat>
-              <Stat>
-                <StyledParagraphXSmall>Page views</StyledParagraphXSmall>
-                <ParagraphXSmall>{pageViews}</ParagraphXSmall>
-              </Stat>
-              <Stat>
-                <StyledParagraphXSmall>Bounce rate</StyledParagraphXSmall>
-                <ParagraphXSmall>{bounceRate}%</ParagraphXSmall>
-              </Stat>
-            </Stats>
-          </StyledSite>
-        </Link>
+        {caption && <Caption>{caption}</Caption>}
+        <StyledSite onClick={onClick}>
+          <Header>
+            <ParagraphSmall>{domain}</ParagraphSmall>
+          </Header>
+          <Stats>
+            <Stat>
+              <StyledParagraphXSmall>Unique visits</StyledParagraphXSmall>
+              <ParagraphXSmall>{uniqueVisits}</ParagraphXSmall>
+            </Stat>
+            <Stat>
+              <StyledParagraphXSmall>Page views</StyledParagraphXSmall>
+              <ParagraphXSmall>{pageViews}</ParagraphXSmall>
+            </Stat>
+            <Stat>
+              <StyledParagraphXSmall>Bounce rate</StyledParagraphXSmall>
+              <ParagraphXSmall>{bounceRate}%</ParagraphXSmall>
+            </Stat>
+          </Stats>
+        </StyledSite>
         <SitePopover
           name={name}
           domain={domain}
@@ -131,7 +139,9 @@ SiteGrid.propTypes = {
   pageViews: PropTypes.number.isRequired,
   bounceRate: PropTypes.number.isRequired,
   addSite: PropTypes.func.isRequired,
-  destroySite: PropTypes.func.isRequired
+  destroySite: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  caption: PropTypes.element
 };
 
 export default SiteGrid;
