@@ -144,6 +144,7 @@ function Sites() {
                   destroySite={destroySite}
                   caption={renderCaption(site)}
                   onClick={() => handleOnClick(site)}
+                  refetch={findMySites.refetch}
                 />
               );
             }
@@ -157,6 +158,7 @@ function Sites() {
                 destroySite={destroySite}
                 caption={renderCaption(site)}
                 onClick={() => handleOnClick(site)}
+                refetch={findMySites.refetch}
               />
             );
           })}

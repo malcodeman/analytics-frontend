@@ -63,7 +63,8 @@ function SiteList(props) {
     addSite,
     destroySite,
     caption,
-    onClick
+    onClick,
+    refetch
   } = props;
 
   return (
@@ -78,6 +79,7 @@ function SiteList(props) {
         addSite={addSite}
         destroySite={destroySite}
         siteId={siteId}
+        refetch={refetch}
       >
         <IconWrapper>
           <ChevronDownIcon size={12} />
@@ -94,7 +96,8 @@ SiteList.propTypes = {
   addSite: PropTypes.func.isRequired,
   destroySite: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
-  caption: PropTypes.element
+  caption: PropTypes.element,
+  refetch: PropTypes.func.isRequired
 };
 
 export default SiteList;

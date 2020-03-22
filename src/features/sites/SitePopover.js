@@ -6,6 +6,7 @@ import { Popover } from "../../components/popover";
 import CopyIcon from "../../icons/Copy";
 import TrashIcon from "../../icons/Trash";
 import { ParagraphSmall } from "../../components/typography";
+import NameForm from "./NameForm";
 
 const Overlay = styled.div`
   display: flex;
@@ -41,7 +42,7 @@ const StyledParagraphSmall = styled(ParagraphSmall)`
 `;
 
 function SitePopover(props) {
-  const { addSite, name, domain, destroySite, siteId } = props;
+  const { addSite, name, domain, destroySite, siteId, refetch } = props;
 
   function handleAddSite(close) {
     addSite({ variables: { name: `${name} copy`, domain } });
@@ -53,10 +54,20 @@ function SitePopover(props) {
     close();
   }
 
+  function onSuccess(close) {
+    refetch();
+    close();
+  }
+
   function overlay(overlayProps) {
     return (
       <Overlay>
         <Menu>
+          <NameForm
+            siteId={siteId}
+            name={name}
+            onSuccess={() => onSuccess(overlayProps.close)}
+          />
           <MenuItem onClick={() => handleAddSite(overlayProps.close)}>
             <CopyIcon />
             <StyledParagraphSmall>Duplicate site</StyledParagraphSmall>
@@ -83,7 +94,8 @@ SitePopover.propTypes = {
   addSite: PropTypes.func.isRequired,
   destroySite: PropTypes.func.isRequired,
   siteId: PropTypes.string.isRequired,
-  children: PropTypes.element
+  children: PropTypes.element,
+  refetch: PropTypes.func.isRequired
 };
 
 export default SitePopover;

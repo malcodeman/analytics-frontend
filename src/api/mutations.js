@@ -67,6 +67,13 @@ const DESTROY_SITE = gql`
     destroySite(siteId: $siteId)
   }
 `;
+const UPDATE_SITE_NAME_MUTATION = gql`
+  mutation updateSiteName($siteId: String!, $name: String!) {
+    updateSiteName(siteId: $siteId, name: $name) {
+      name
+    }
+  }
+`;
 
 export default {
   SIGNUP_MUTATION,
@@ -74,5 +81,6 @@ export default {
   SEND_TEMPORARY_PASSWORD_MUTATION,
   UPDATE_USER_MUTATION,
   ADD_SITE,
-  DESTROY_SITE
+  DESTROY_SITE,
+  UPDATE_SITE_NAME_MUTATION
 };
