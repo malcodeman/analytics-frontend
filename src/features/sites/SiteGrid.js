@@ -91,6 +91,11 @@ function SiteGrid(props) {
     onClick,
     refetch
   } = props;
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  function onDoubleClick() {
+    setIsVisible(true);
+  }
 
   return (
     <Wrapper>
@@ -122,13 +127,15 @@ function SiteGrid(props) {
           destroySite={destroySite}
           siteId={siteId}
           refetch={refetch}
+          isVisible={isVisible}
+          setIsVisible={setIsVisible}
         >
           <IconWrapper>
             <ChevronDownIcon size={12} />
           </IconWrapper>
         </SitePopover>
       </Container>
-      <ParagraphSmall>{name}</ParagraphSmall>
+      <ParagraphSmall onDoubleClick={onDoubleClick}>{name}</ParagraphSmall>
     </Wrapper>
   );
 }

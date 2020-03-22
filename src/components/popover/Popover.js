@@ -11,7 +11,8 @@ function Popover(props) {
     overlay,
     shouldCloseOnExternalClick,
     isVisible,
-    children
+    children,
+    onClose
   } = props;
   const { reference, popper } = usePopper({ placement });
   const [visible, setVisible] = useState(false);
@@ -20,6 +21,9 @@ function Popover(props) {
 
   function close() {
     setVisible(false);
+    if (typeof onClose === "function") {
+      onClose();
+    }
   }
 
   function handleToggle() {
@@ -67,7 +71,8 @@ Popover.propTypes = {
   overlay: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
   isVisible: PropTypes.bool,
-  shouldCloseOnExternalClick: PropTypes.bool
+  shouldCloseOnExternalClick: PropTypes.bool,
+  onClose: PropTypes.func
 };
 
 Popover.defaultProps = {

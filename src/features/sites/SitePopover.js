@@ -42,7 +42,16 @@ const StyledParagraphSmall = styled(ParagraphSmall)`
 `;
 
 function SitePopover(props) {
-  const { addSite, name, domain, destroySite, siteId, refetch } = props;
+  const {
+    addSite,
+    name,
+    domain,
+    destroySite,
+    siteId,
+    refetch,
+    isVisible,
+    setIsVisible
+  } = props;
 
   function handleAddSite(close) {
     addSite({ variables: { name: `${name} copy`, domain } });
@@ -82,7 +91,12 @@ function SitePopover(props) {
   }
 
   return (
-    <Popover placement="bottom" overlay={overlay}>
+    <Popover
+      placement="bottom"
+      overlay={overlay}
+      isVisible={isVisible}
+      onClose={() => setIsVisible(false)}
+    >
       {props.children}
     </Popover>
   );
@@ -95,7 +109,9 @@ SitePopover.propTypes = {
   destroySite: PropTypes.func.isRequired,
   siteId: PropTypes.string.isRequired,
   children: PropTypes.element,
-  refetch: PropTypes.func.isRequired
+  refetch: PropTypes.func.isRequired,
+  isVisible: PropTypes.bool,
+  setIsVisible: PropTypes.func
 };
 
 export default SitePopover;
