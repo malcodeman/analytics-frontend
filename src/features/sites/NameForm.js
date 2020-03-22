@@ -35,6 +35,7 @@ function NameForm(props) {
       });
     }
   });
+  const ref = React.createRef(null);
 
   React.useEffect(() => {
     if (updateSiteNameResult.data && updateSiteNameResult.data.updateSiteName) {
@@ -42,6 +43,13 @@ function NameForm(props) {
         props.onSuccess(updateSiteNameResult.data.updateSiteName);
     }
   }, [updateSiteNameResult]);
+
+  React.useEffect(() => {
+    if (ref.current && !formik.dirty) {
+      ref.current.focus();
+      ref.current.select();
+    }
+  }, [ref, formik.dirty]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -55,6 +63,7 @@ function NameForm(props) {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="name"
+            ref={ref}
           />
         </FormControl>
       </FormWrapper>

@@ -43,7 +43,7 @@ function VerifySiteForm(props) {
     <>
       {error && error.message}
       <FormControl label="Site ID">
-        <Input value={siteId} />
+        <Input readOnly value={siteId} />
       </FormControl>
       <FormControl label="HTML embed code">
         <StyledTextarea value={code} />

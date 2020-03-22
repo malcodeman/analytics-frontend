@@ -9,7 +9,7 @@ const StyledInput = styled.input`
   ${getInputStyles};
 `;
 
-function Input(props) {
+function Input(props, ref) {
   const {
     size,
     value,
@@ -23,6 +23,7 @@ function Input(props) {
   return (
     <StyledInput
       {...props}
+      ref={ref}
       size={size}
       value={value}
       placeholder={placeholder}
@@ -54,4 +55,4 @@ Input.defaultProps = {
   onChange: () => {}
 };
 
-export default Input;
+export default React.forwardRef(Input);

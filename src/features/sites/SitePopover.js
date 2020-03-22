@@ -68,6 +68,12 @@ function SitePopover(props) {
     close();
   }
 
+  function onClose() {
+    if (typeof setIsVisible === "function") {
+      setIsVisible(false);
+    }
+  }
+
   function overlay(overlayProps) {
     return (
       <Overlay>
@@ -95,7 +101,7 @@ function SitePopover(props) {
       placement="bottom"
       overlay={overlay}
       isVisible={isVisible}
-      onClose={() => setIsVisible(false)}
+      onClose={onClose}
     >
       {props.children}
     </Popover>
