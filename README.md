@@ -10,7 +10,7 @@ Simple analytics for startups.
 ## Getting started
 
 ```
-git clone https://github.com/malcodeman/analytics-frontend.git analytics-frontend
+git clone https://github.com/malcodeman/analytics-frontend.git
 cd analytics-frontend
 yarn install && yarn start
 ```
