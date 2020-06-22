@@ -27,7 +27,7 @@ const IconWrapper = styled.div`
   margin-bottom: 0.25rem;
   transition: 0.085s all ease-in;
   cursor: pointer;
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -45,8 +45,8 @@ const Container = styled.div`
 const StyledSite = styled.div`
   padding: 1rem;
   transition: 0.085s all ease-in;
-  border-radius: ${props => props.theme.borders.radius200};
-  background-color: ${props => props.theme.colors.backgroundSecondary};
+  border-radius: ${(props) => props.theme.borders.radius200};
+  background-color: ${(props) => props.theme.colors.backgroundSecondary};
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -66,7 +66,7 @@ const Stat = styled.div`
 `;
 
 const StyledParagraphXSmall = styled(ParagraphXSmall)`
-  color: ${props => props.theme.colors.contentSecondary};
+  color: ${(props) => props.theme.colors.contentSecondary};
 `;
 
 const Caption = styled.div`
@@ -89,7 +89,7 @@ function SiteGrid(props) {
     destroySite,
     caption,
     onClick,
-    refetch
+    refetch,
   } = props;
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -130,7 +130,7 @@ function SiteGrid(props) {
           isVisible={isVisible}
           setIsVisible={setIsVisible}
         >
-          <IconWrapper>
+          <IconWrapper onClick={() => setIsVisible(true)}>
             <ChevronDownIcon size={12} />
           </IconWrapper>
         </SitePopover>
@@ -151,7 +151,7 @@ SiteGrid.propTypes = {
   destroySite: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   caption: PropTypes.element,
-  refetch: PropTypes.func.isRequired
+  refetch: PropTypes.func.isRequired,
 };
 
 export default SiteGrid;

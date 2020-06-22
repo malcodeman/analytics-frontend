@@ -21,7 +21,7 @@ const IconWrapper = styled.div`
   margin-bottom: 0.25rem;
   transition: 0.085s all ease-in;
   cursor: pointer;
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -40,8 +40,8 @@ const StyledSite = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  border-radius: ${props => props.theme.borders.radius200};
-  background-color: ${props => props.theme.colors.backgroundSecondary};
+  border-radius: ${(props) => props.theme.borders.radius200};
+  background-color: ${(props) => props.theme.colors.backgroundSecondary};
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -64,8 +64,9 @@ function SiteList(props) {
     destroySite,
     caption,
     onClick,
-    refetch
+    refetch,
   } = props;
+  const [isVisible, setIsVisible] = React.useState(false);
 
   return (
     <Container>
@@ -80,8 +81,10 @@ function SiteList(props) {
         destroySite={destroySite}
         siteId={siteId}
         refetch={refetch}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
       >
-        <IconWrapper>
+        <IconWrapper onClick={() => setIsVisible(true)}>
           <ChevronDownIcon size={12} />
         </IconWrapper>
       </SitePopover>
@@ -97,7 +100,7 @@ SiteList.propTypes = {
   destroySite: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   caption: PropTypes.element,
-  refetch: PropTypes.func.isRequired
+  refetch: PropTypes.func.isRequired,
 };
 
 export default SiteList;

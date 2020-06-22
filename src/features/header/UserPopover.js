@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useApolloClient, useQuery } from "@apollo/react-hooks";
 import { useHistory } from "react-router-dom";
+import { StatefulPopover, PLACEMENT } from "@malcodeman/react-popover";
 
-import { Popover } from "../../components/popover";
 import UserIcon from "../../icons/User";
 import LogOutIcon from "../../icons/LogOut";
 import { ParagraphSmall } from "../../components/typography";
@@ -17,13 +17,13 @@ const Overlay = styled.div`
   width: 240px;
   z-index: 1;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-  border-radius: ${props => props.theme.borders.radius200};
-  background-color: ${props => props.theme.colors.backgroundTertiary};
+  border-radius: ${(props) => props.theme.borders.radius200};
+  background-color: ${(props) => props.theme.colors.backgroundTertiary};
 `;
 
 const IconWrapper = styled.div`
   cursor: pointer;
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 const Menu = styled.ul`
@@ -38,8 +38,8 @@ const MenuItem = styled.li`
   align-items: center;
   padding: 0.5rem;
   cursor: pointer;
-  color: ${props => props.theme.colors.primary};
-  border-radius: ${props => props.theme.borders.radius200};
+  color: ${(props) => props.theme.colors.primary};
+  border-radius: ${(props) => props.theme.borders.radius200};
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
@@ -49,7 +49,7 @@ const StyledParagraphSmall = styled(ParagraphSmall)`
   margin-left: 0.5rem;
 `;
 
-function UserPopover(props) {
+function UserPopover() {
   const client = useApolloClient();
   const history = useHistory();
   const { data } = useQuery(queries.FIND_THEME);
@@ -90,11 +90,11 @@ function UserPopover(props) {
   }
 
   return (
-    <Popover {...props} placement="bottom-end" overlay={overlay}>
+    <StatefulPopover placement={PLACEMENT.BOTTOM_END} content={overlay}>
       <IconWrapper>
         <UserIcon />
       </IconWrapper>
-    </Popover>
+    </StatefulPopover>
   );
 }
 
