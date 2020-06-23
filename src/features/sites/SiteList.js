@@ -47,6 +47,10 @@ const StyledSite = styled.div`
   }
 `;
 
+const StyledParagraphSmall = styled(ParagraphSmall)`
+  overflow-wrap: anywhere;
+`;
+
 const Caption = styled.div`
   position: absolute;
   top: 0;
@@ -72,7 +76,7 @@ function SiteList(props) {
     <Container>
       {caption && <Caption>{caption}</Caption>}
       <StyledSite onClick={onClick}>
-        <ParagraphSmall>{name}</ParagraphSmall>
+        <StyledParagraphSmall>{name}</StyledParagraphSmall>
       </StyledSite>
       <SitePopover
         name={name}
