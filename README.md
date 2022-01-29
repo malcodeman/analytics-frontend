@@ -23,3 +23,7 @@ ANALYTICS_SCRIPT_SOURCE=https://codepen.io/akwdkaj2dka2j/pen/ExaBOyx.js
 NODE_ENV=development
 MAPBOX_ACCESS_TOKEN=token
 ```
+
+## License
+
+[MIT](./LICENSE)
